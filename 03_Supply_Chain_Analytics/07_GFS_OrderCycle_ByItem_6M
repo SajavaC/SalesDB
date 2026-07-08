@@ -1,18 +1,15 @@
 /*******************************************************************************
-OBJECT NAME:    GFS_OrderCycle_ByItem_6M
-DESCRIPTION:    Macro Item-Level Velocity View. Analyzes rolling 6-month product 
-                ordering cycles, aggregate sample sizes, and volume velocity.
-                
-                * NOTE ON BUSINESS LOGIC LIMITATION *
-                The monthly and weekly averages are calculated using a fixed 
-                6-month denominator rather than adjusting for each store’s actual 
-                operating period. As a result, stores that opened recently may 
-                have their averages slightly understated due to the inclusion 
-                of inactive months.
-AUTHOR:         Sajava Chang
-DATE:           2026-07
-TYPE:           Supply Chain Demand Planning / Rolling Forecast View
-DEPENDENCIES:   y_GFS_OrderGaps, Item, Store, GFSsales
+-- Query Name: GFS_OrderCycle_ByItem_6M
+-- DESCRIPTION: Macro Item-Level Velocity View. Analyzes rolling 6-month product 
+--              ordering cycles, aggregate sample sizes, and volume velocity.
+--                 
+--              * NOTE ON BUSINESS LOGIC LIMITATION *
+--              The monthly and weekly averages are calculated using a fixed 
+--              6-month denominator rather than adjusting for each store’s actual 
+--              operating period. As a result, stores that opened recently may 
+--              have their averages slightly understated due to the inclusion 
+--              of inactive months.
+-- DEPENDENCIES: y_GFS_OrderGaps, Item, Store, GFSsales
 *******************************************************************************/
 
 SELECT
