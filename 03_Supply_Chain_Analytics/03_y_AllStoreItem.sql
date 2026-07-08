@@ -7,7 +7,7 @@
 --                   it ensures that downstream analytics can detect 'zero-order periods' (Data Gaps). 
 --                   Without this cross-joined base table, skipped orders would disappear from logs, 
 --                   severely corrupting store order frequency calculations.
--- USED BY:        GFS_OrderCycle_ByItemStore
+-- USED BY: GFS_OrderCycle_ByItemStore
 -- =================================================================================
 
 SELECT
