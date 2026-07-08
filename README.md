@@ -8,18 +8,18 @@ Note: All sensitive business data, proprietary store identities, and financial m
 
 ## Business Applications & Impact
 
-This database was designed to support day-to-day supply chain operations by turning raw sales and distributor data into actionable information.
+This database was designed to automate recurring operational analyses by combining retail sales data and wholesale shipment records into a single relational database.
 
 Its primary business applications include:
 
-1. **Sales & Shipment Reconciliation**  
-   Standardizes retail sales data from the POS system and compares it with wholesale shipment data from the distributor. This helps identify whether purchasing patterns align with actual product consumption.
+1. **Sales & Purchasing Analysis**  
+   Consolidates retail sales data from the POS system with wholesale shipment records from the distributor, making it possible to compare product consumption with purchasing activity. This helps identify stores whose purchasing patterns differ significantly from their actual sales.
 
 2. **Master Data Validation**  
    Automatically checks for newly opened stores or unmatched store names after each data import, ensuring all sales records are properly linked before analysis.
 
-3. **Order Pattern Analysis**  
-   Analyzes historical ordering frequency for each product and each store, providing visibility into purchasing behavior and helping support inventory planning and replenishment decisions.
+3. **Store Purchasing Behavior Analysis**
+   Analyzes historical ordering frequency, purchasing intervals, and average consumption for each product at both the product and store level. These reports help Operations understand purchasing behavior while also supporting inventory planning.
 
 ---
 
@@ -29,18 +29,15 @@ Its primary business applications include:
 
 ## Project Overview
 
-This project was built to support supply chain operations for a multi-location smoothie chain.
+This project was originally created to solve a recurring operational reporting challenge.
 
-The company receives sales data from two different systems:
+Retail sales data from GoParrot and wholesale shipment data from Gordon Food Service (GFS) were stored in separate systems, making it difficult to compare product consumption with purchasing behavior. Preparing these analyses manually was time-consuming and difficult to maintain as the business continued to expand.
 
-- **GoParrot** provides retail sales data from individual stores.
-- **Gordon Food Service (GFS)** provides wholesale shipment records.
+To solve this problem, I designed this relational database in Microsoft Access to consolidate both data sources into a single data model. The database automates monthly reporting, supports operational analysis at the individual store level, and provides insights into product consumption, purchasing behavior, and inventory planning.
 
-Because these systems use different product names, store names, and data structures, comparing retail sales with distributor shipments was a manual and time-consuming process.
+Although built with Microsoft Access, the focus of this project is not the database platform itself, but designing a practical business solution that supports operational decision-making.
 
-To solve this problem, I designed this relational database in Microsoft Access to consolidate both data sources into a single data model. The database standardizes master data, converts retail sales into comparable inventory quantities, and generates operational reports that support purchasing analysis, inventory planning, and order cycle monitoring.
-
-Although built with Microsoft Access, the focus of this project is not the database platform itself, but designing a practical data solution that supports daily business decisions.
+This database was not created as a technical exercise. It was built to eliminate repetitive manual analysis by automating reports that had become part of the monthly business process.
 
 ---
 
@@ -147,9 +144,9 @@ This stage converts sales data from different sources into a consistent format f
 
 ---
 
-### Stage 3: Supply Chain Analysis
+### Stage 3: Operational & Supply Chain Analysis
 
-The final stage generates reports that support purchasing decisions, inventory planning, and order behavior analysis.
+The final stage produces reports that support both operational reviews and supply chain planning.
 
 #### `Avg2Month.sql`
 
