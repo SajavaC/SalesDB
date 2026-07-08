@@ -70,6 +70,49 @@ B2B wholesale distribution data tracking physical product shipments.
 
 ---
 
+## 🛠️ Multi-Channel SQL ETL & Analytics Pipeline
+
+To bridge the gap between B2C retail transactions and B2B distributor logistics, this project implements a structural 3-stage SQL pipeline within MS Access. Below is the architectural blueprint of how data is cleansed, harmonized, and translated into supply chain intelligence.
+
+### Stage 1: Data Preparation & Governance (`/01_Data_Preparation`)
+This initial phase establishes relational integrity and sets up automated data-quality guardrails post-import.
+*   **`01_Update_Oursales_items.sql`** & **`02_Update_Oursales_modifiers.sql`**
+    *   *Core Logic:* Executes an `INNER JOIN` between front-of-house transaction tables and the `Store` dimension registry.
+    *   *Business Value:* Harmonizes messy POS storefront names with standardized GFS distributor store codes, ensuring 100% downstream accounting compliance.
+*   **`03_check_NewStores.sql`**
+    *   *Core Logic:* Exception-monitoring query identifying any active sales records where `StoreCode IS NULL`.
+    *   *Business Value:* Acts as an automated data governance guardrail. It instantly flags expansion anomalies (e.g., a new store opened or a POS name changed without updating the master registry), protecting downstream analyses from data corruption.
+
+### Stage 2: Sales Harmonization & Case Conversion (`/02_Sales_Harmonization`)
+This phase focuses on rule extraction, merging disparate revenue streams, and standardizing transactional metrics.
+*   **`z_1CupBag_Template.sql`**, **`z_12ozcup_Template.sql`**, & **`z_Granola.sql`**
+    *   *Core Logic:* Rule-based transformation views. They isolate specific raw material drivers across both main line-items and conditional checkout modifiers (e.g., isolating cold drink cups while excluding hot beverage categories).
+*   **`OurSoldQty.sql`**
+    *   *Core Logic:* Executes a clean `UNION ALL` structure to compile individual item mappings. 
+    *   *Architecture Note:* In production, this consolidates dozens of operational SKUs. Here, three core pillars (Packaging, Portion Volume, and Recipe Modifiers) are demonstrated as a clean architectural slice.
+*   **`AllSales_Union.sql` (The Pipeline Core)**
+    *   *Core Logic:* Integrates the B2C retail POS stream and B2B wholesaler logs into a unified table using打標分流 (`'OurSold'` vs `'GFSSold'`).
+    *   *Supply Chain Formulation:* Implements a crucial conversion formula: `ROUND((Qty * Serving) / Size, 1)`. This translates consumer portion servings dynamically into standardized distributor shipment units (Cases), achieving a flawless apples-to-apples audit grid.
+
+### Stage 3: Supply Chain Predictive Analytics (`/03_Supply_Chain_Analytics`)
+Moving beyond descriptive statistics, this final phase applies advanced statistical modeling and sequencing logic to expose operational risks.
+*   **`01_Avg2Month_Rolling.sql`**
+    *   *Core Logic:* Uses a controlled `Self-Join` combined with `Nz()` boundary handling to compute a 60-day moving average.
+    *   *Business Value:* Smooths out short-term logistical noise, cargo delays, and transactional variance, establishing a reliable demand baseline.
+*   **`02_Adj_CVR_Calculation.sql`**
+    *   *Core Logic:* Establishes a dynamic conversion rate (Adj_CVR) over a rolling 3-month window.
+    *   *Business Value:* Scales physical depletion against aggregate revenue while factoring in an operational `AdjFactor` for store-level waste and shrinkage. It calculates the precise material footprint per dollar of sales, providing an automated foundation for rolling inventory forecasting.
+*   **`03_y_AllStoreItem.sql`**
+    *   *Core Logic:* Generates a comprehensive Cartesian Product (`CROSS JOIN`) between all active stores and inventory items.
+    *   *Business Value:* Creates a continuous reference grid (Master Grid) that forces "zero-order periods" (missing sequences) into visibility, preventing skipped orders from being silenced in the data.
+*   **`04_y_GFS_OrderGaps.sql`**
+    *   *Core Logic:* Engineeringly replicates the analytical functionality of a native SQL `LEAD()` window function within an MS Access environment via a localized correlated subquery (`MIN(G2.Month) where G2.Month > G1.Month`).
+*   **`05_GFS_OrderCycle_ByItemStore.sql` (The Executive Dashboard View)**
+    *   *Core Logic:* Aggregates sequence gaps over the Cartesian backbone using `DateDiff`, outputting `AvgGapMonths` (procurement frequency) and `MaxGapMonths` (peak supply risk).
+    *   *Business Value:* Provides executive leadership with an empirical framework to optimize safety stock parameters, balance distributor Minimum Order Quantities (MOQs), and proactively mitigate stockout exposure before it hits the bottom line.
+
+---
+
 ## 🚀 Business Applications & Impact
 
 This analytics engine transitions operational workflows from manual spreadsheet checking to automated SQL-driven insights:
