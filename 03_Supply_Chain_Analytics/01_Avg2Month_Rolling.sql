@@ -1,5 +1,4 @@
 -- =================================================================================
--- Query Name: 01_Avg2Month_Rolling
 -- Description: Calculates a 60-day rolling moving average for multi-channel sales volume
 --              by executing a controlled Self-Join on the combined sales dataset.
 -- Business Context: Retail consumption and wholesale ordering are notoriously volatile 
