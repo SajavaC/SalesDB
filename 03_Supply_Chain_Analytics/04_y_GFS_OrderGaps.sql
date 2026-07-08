@@ -1,5 +1,4 @@
 -- =================================================================================
--- Query Name: 04_y_GFS_OrderGaps
 -- Description: Simulates the SQL 'LEAD()' window function within an MS Access environment 
 --              using a high-performance Correlated Subquery.
 -- Business Context: In order cycle analysis, we must calculate the time elapsed between 
@@ -7,6 +6,7 @@
 --                   native window function support, this query programmatically looks ahead 
 --                   by finding the absolute minimum month (MIN) that is strictly greater than 
 --                   the active record's month, isolating the next chronological purchase event.
+-- USED BY:        GFS_OrderCycle_ByItemStore
 -- =================================================================================
 
 SELECT
