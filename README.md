@@ -6,6 +6,20 @@ Note: All sensitive business data, proprietary store identities, and financial m
 
 ---
 
+## Project Overview
+
+This project was originally created to solve a recurring operational reporting challenge.
+
+Retail sales data from GoParrot and wholesale shipment data from Gordon Food Service (GFS) were stored in separate systems, making it difficult to compare product consumption with purchasing behavior. Preparing these analyses manually was time-consuming and difficult to maintain as the business continued to expand.
+
+To solve this problem, I designed this relational database in Microsoft Access to consolidate both data sources into a single data model. The database automates monthly reporting, supports operational analysis at the individual store level, and provides insights into product consumption, purchasing behavior, and inventory planning.
+
+Although built with Microsoft Access, the focus of this project is not the database platform itself, but designing a practical business solution that supports operational decision-making.
+
+This database was not created as a technical exercise. It was built to eliminate repetitive manual analysis by automating reports that had become part of the monthly business process.
+
+---
+
 ## Business Applications & Impact
 
 This database was designed to automate recurring operational analyses by combining retail sales data and wholesale shipment records into a single relational database.
@@ -26,18 +40,6 @@ Its primary business applications include:
 ## Database Relationship Diagram
 
 ![Database Relationship Diagram](relationship_diagram.png)
-
-## Project Overview
-
-This project was originally created to solve a recurring operational reporting challenge.
-
-Retail sales data from GoParrot and wholesale shipment data from Gordon Food Service (GFS) were stored in separate systems, making it difficult to compare product consumption with purchasing behavior. Preparing these analyses manually was time-consuming and difficult to maintain as the business continued to expand.
-
-To solve this problem, I designed this relational database in Microsoft Access to consolidate both data sources into a single data model. The database automates monthly reporting, supports operational analysis at the individual store level, and provides insights into product consumption, purchasing behavior, and inventory planning.
-
-Although built with Microsoft Access, the focus of this project is not the database platform itself, but designing a practical business solution that supports operational decision-making.
-
-This database was not created as a technical exercise. It was built to eliminate repetitive manual analysis by automating reports that had become part of the monthly business process.
 
 ---
 
