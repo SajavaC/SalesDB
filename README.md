@@ -20,7 +20,7 @@ This database was not created as a technical exercise. It was built to eliminate
 
 ---
 
-## Business Applications & Impact
+## Business Applications
 
 This database was designed to automate recurring operational analyses by combining retail sales data and wholesale shipment records into a single relational database.
 
@@ -43,7 +43,7 @@ Its primary business applications include:
 
 ---
 
-## Core Database Schema & Data Dictionary
+## Data Dictionary & Schema
 
 The database consists of the following key tables, engineered with clean relational constraints and data governance principles:
 
@@ -105,7 +105,7 @@ B2B wholesale distribution data tracking physical product shipments.
 
 ---
 
-## Multi-Channel SQL ETL & Analytics Pipeline
+## SQL Reports
 
 This database follows a three-stage workflow that transforms raw sales data into information that supports day-to-day supply chain decisions.
 
