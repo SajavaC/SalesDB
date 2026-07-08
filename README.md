@@ -8,11 +8,18 @@ Note: All sensitive business data, proprietary store identities, and financial m
 
 ## Business Applications & Impact
 
-This analytics engine transitions operational workflows from manual spreadsheet checking to automated SQL-driven insights:
+This database was designed to support day-to-day supply chain operations by turning raw sales and distributor data into actionable information.
 
-1.  **Cross-Channel Quantity Reconciliation**: Unifies disparate naming conventions by mapping text-based retail sales data to standardized GFS ItemCodes, allowing direct comparison with physical wholesale shipment volumes.
-2.  **Automated Master Data Governance**: Implements automated exception monitoring to flag newly opened stores missing from the master registry, ensuring 100% data compliance before analysis.
-3.  **B2B Order Cycle Forecasting**: Using advanced relational queries to calculate historical ordering frequency (order gaps) per item per store, directly optimizing supply chain stock management.
+Its primary business applications include:
+
+1. **Sales & Shipment Reconciliation**  
+   Standardizes retail sales data from the POS system and compares it with wholesale shipment data from the distributor. This helps identify whether purchasing patterns align with actual product consumption.
+
+2. **Master Data Validation**  
+   Automatically checks for newly opened stores or unmatched store names after each data import, ensuring all sales records are properly linked before analysis.
+
+3. **Order Pattern Analysis**  
+   Analyzes historical ordering frequency for each product and each store, providing visibility into purchasing behavior and helping support inventory planning and replenishment decisions.
 
 ---
 
@@ -21,9 +28,19 @@ This analytics engine transitions operational workflows from manual spreadsheet 
 ![Database Relationship Diagram](relationship_diagram.png)
 
 ## Project Overview
-This project delivers an **operational SQL database solution** engineered for a multi-location **smoothie chain** to bridge the gap between B2C retail POS sales and B2B distributor logistics. 
 
-By unifying disparate data sources, this database serves as a single source of truth to drive multi-channel sales reconciliation, master data alignment, and distributor ordering cycle forecasting.
+This project was built to support supply chain operations for a multi-location smoothie chain.
+
+The company receives sales data from two different systems:
+
+- **GoParrot** provides retail sales data from individual stores.
+- **Gordon Food Service (GFS)** provides wholesale shipment records.
+
+Because these systems use different product names, store names, and data structures, comparing retail sales with distributor shipments was a manual and time-consuming process.
+
+To solve this problem, I designed this relational database in Microsoft Access to consolidate both data sources into a single data model. The database standardizes master data, converts retail sales into comparable inventory quantities, and generates operational reports that support purchasing analysis, inventory planning, and order cycle monitoring.
+
+Although built with Microsoft Access, the focus of this project is not the database platform itself, but designing a practical data solution that supports daily business decisions.
 
 ---
 
@@ -91,59 +108,85 @@ B2B wholesale distribution data tracking physical product shipments.
 
 ## Multi-Channel SQL ETL & Analytics Pipeline
 
-To bridge the gap between B2C retail transactions and B2B distributor logistics, this project implements a structural 3-stage SQL pipeline within MS Access. Below is the architectural blueprint of how data is cleansed, harmonized, and translated into supply chain intelligence.
+This database follows a three-stage workflow that transforms raw sales data into information that supports day-to-day supply chain decisions.
 
-### Stage 1: Data Preparation & Governance (`/01_Data_Preparation`)
-This initial phase establishes relational integrity and sets up automated data-quality guardrails post-import.
-*   **`01_Update_Oursales_items.sql`** & **`02_Update_Oursales_modifiers.sql`**
-    *   *Core Logic:* Executes an `INNER JOIN` between front-of-house transaction tables and the `Store` dimension registry.
-    *   *Business Value:* Harmonizes messy POS storefront names with standardized GFS distributor store codes, ensuring 100% downstream accounting compliance.
-*   **`03_check_NewStores.sql`**
-    *   *Core Logic:* Exception-monitoring query identifying any active sales records where `StoreCode IS NULL`.
-    *   *Business Value:* Acts as an automated data governance guardrail. It instantly flags expansion anomalies (e.g., a new store opened or a POS name changed without updating the master registry), protecting downstream analyses from data corruption.
+### Stage 1: Data Preparation & Validation
 
-### Stage 2: Sales Harmonization & Case Conversion (`/02_Sales_Harmonization`)
-This phase focuses on rule extraction, merging disparate revenue streams, and standardizing transactional metrics.
-*   **`z_1CupBag_Template.sql`**, **`z_12ozcup_Template.sql`**, & **`z_Granola.sql`**
-    *   *Core Logic:* Rule-based transformation views. They isolate specific raw material drivers across both main line-items and conditional checkout modifiers (e.g., isolating cold drink cups while excluding hot beverage categories).
-*   **`OurSoldQty.sql`**
-    *   *Core Logic:* Executes a clean `UNION ALL` structure to compile individual item mappings. 
-    *   *Architecture Note:* In production, this consolidates dozens of operational SKUs. Here, three core pillars (Packaging, Portion Volume, and Recipe Modifiers) are demonstrated as a clean architectural slice.
-*   **`AllSales_Union.sql` (The Pipeline Core)**
-    *   *Core Logic:* Integrates the B2C retail POS stream and B2B wholesaler logs into a unified table using打標分流 (`'OurSold'` vs `'GFSSold'`).
-    *   *Supply Chain Formulation:* Implements a crucial conversion formula: `ROUND((Qty * Serving) / Size, 1)`. This translates consumer portion servings dynamically into standardized distributor shipment units (Cases), achieving a flawless apples-to-apples audit grid.
+The first stage focuses on preparing imported data and ensuring it is ready for analysis.
 
-### Stage 3: Supply Chain Predictive Analytics & Lifecycle Analytics (`/03_Supply_Chain_Analytics`)
-Moving beyond descriptive statistics, this final phase applies advanced statistical modeling and sequencing logic to expose operational risks. It provides dual-perspective visibility (micro store-level vs. macro product-level) to dynamically audit distributor pull velocity while isolating data anomalies caused by corporate expansion.
+#### `01_Update_Oursales_items.sql` & `02_Update_Oursales_modifiers.sql`
 
-*   **`01_Avg2Month_Rolling.sql`**
-    *   *Core Logic:* Uses a controlled `Self-Join` combined with `NZ()` boundary handling to compute a 60-day moving average.
-    *   *Business Value:* Smooths out short-term logistical noise, cargo delays, and transactional variance, establishing a reliable demand baseline.
+- **Purpose:** Match store names from GoParrot sales reports with the company's master store list.
+- **Business Value:** Automatically assigns the correct StoreCode to each sales record, ensuring that retail sales and GFS shipment data can be linked accurately.
 
-*   **`02_Adj_CVR_Calculation.sql`**
-    *   *Core Logic:* Establishes a dynamic conversion rate (Adj_CVR) over a rolling 3-month window.
-    *   *Business Value:* Scales physical depletion against aggregate revenue while factoring in an operational `AdjFactor` for store-level waste and shrinkage. It calculates the precise material footprint per dollar of sales, providing an automated foundation for rolling inventory forecasting.
+#### `03_check_NewStores.sql`
 
-*   **`03_y_AllStoreItem.sql`**
-    *   *Core Logic:* Generates a comprehensive Cartesian Product (`CROSS JOIN`) between all active stores and inventory items.
-    *   *Business Value:* Creates a continuous reference grid (Master Grid) that forces "zero-order periods" (missing sequences) into visibility, preventing skipped orders from being silenced in the data.
+- **Purpose:** Identifies stores that appear in newly imported sales data but are not yet included in the master store table.
+- **Business Value:** Helps detect newly opened stores or store name changes before they affect reports and analysis.
 
-*   **`04_y_GFS_OrderGaps.sql`**
-    *   *Core Logic:* Engineeringly replicates the analytical functionality of a native SQL `LEAD()` window function within an MS Access environment via a localized correlated subquery (`MIN(G2.Month) where G2.Month > G1.Month`).
-    *   *Business Value:* Exposes actual supply chain order frequencies and hidden out-of-stock gaps by measuring the exact time elapsed between sequential distributor pulls.
+---
 
-*   **`05_y_GFS_TotalStats.sql`**
-    *   *Core Logic:* Executes an aggregate `GROUP BY` to compile the absolute lifetime transactional baseline (`OrderCount` and `TotalQty`) mapped by each store-item allocation.
-    *   *Business Value:* Serves as a vital staging summary that stabilizes volumetric calculations for downstream simulation logic, preventing performance bottlenecks in cross-join views.
+### Stage 2: Sales Consolidation & Data Transformation
 
-*   **`06_GFS_OrderCycle_ByItemStore.sql` (Micro Store-Level Analytics)**
-    *   *Core Logic:* A sophisticated multi-layered analytical query that dynamically injects temporal metadata (`Store.Start`) to establish true store lifespans (`MonthsSinceOpen`) while filtering for active accounts (`Store.Active IS NOT NULL`). It utilizes dynamic rolling maximum subqueries `(SELECT MAX(Month) FROM GFSsales)` to normalize demand velocity.
-    *   *Advanced Dynamic Formulations:*
-        *   `AvgQtyPerMonth` & `AvgQtyPerWeek`: Dynamically scales total lifetime distributor pull volume against the specific store’s operational age rather than an arbitrary global time horizon (incorporates a standard `4.33` weeks/month multiplier).
-        *   Automated Lifecycle Flagging: Employs nested conditional evaluation `IIF(SampleSize = 0, IIF(MonthsSinceOpen < 3, "Too New", "No Orders"), "")` to dynamically isolate data anomalies.
-    *   *Business Value:* Provides executive leadership with a self-calibrating audit framework. It automatically filters out newly opened expansion storefronts (`Too New`) from being falsely penalized as dormant, while instantly triggering red-flag alerts (`No Orders`) for mature distribution lines facing critical stockout risks.
+This stage converts sales data from different sources into a consistent format for comparison.
 
-*   **`07_GFS_OrderCycle_ByItem_6M.sql` (Macro Product-Level 6-Month Rolling Forecast)**
-    *   *Core Logic:* Extracts a macro, aggregated product velocity pipeline by consolidating cross-store transaction records over a strict rolling 5-month historical lookback window plus the current month `DATEADD("m", -5, (SELECT MAX(Month) FROM GFSsales))`.
-    *   *Analytical Boundary Disclosure:* Dynamically flags model limitations. Because it utilizes a fixed 6-month denominator to establish macro baselines, it intentionally trade-offs individual store operational age for a standardized, high-level product movement snapshot.
-    *   *Business Value:* Serves as the primary baseline for Master Procurement Planning and vendor SLA auditing. By filtering out inactive locations and focusing on the immediate rolling 6-month product momentum, it provides the exact volumetric constraints needed for bulk-contract negotiation, lead-time safety stock configuration, and high-level distribution logistics auditing.
+#### `z_1CupBag.sql`, `z_12ozcup.sql`, `z_Granola.sql`
+
+- **Purpose:** Extract sales quantities for specific products and packaging materials from both main menu items and modifiers.
+- **Business Value:** Translates POS sales into estimated inventory consumption, allowing retail sales to be compared with wholesale purchases.
+
+#### `OurSoldQty.sql`
+
+- **Purpose:** Combines individual product queries into a single dataset.
+- **Business Value:** Creates a standardized sales table that serves as the foundation for downstream analysis.
+
+#### `AllSales.sql`
+
+- **Purpose:** Combines estimated product consumption from GoParrot with actual shipment records from GFS.
+- **Business Value:** Provides a unified view that makes it easy to compare what stores sold versus what they ordered from the distributor.
+
+---
+
+### Stage 3: Supply Chain Analysis
+
+The final stage generates reports that support purchasing decisions, inventory planning, and order behavior analysis.
+
+#### `Avg2Month.sql`
+
+- **Purpose:** Calculates a rolling two-month average for each product.
+- **Business Value:** Reduces the impact of monthly fluctuations and provides a more stable reference when reviewing purchasing behavior.
+
+#### `Adj_CVR.sql`
+
+- **Purpose:** Calculates adjusted conversion rates based on recent sales performance.
+- **Business Value:** Supports demand planning by estimating material usage from projected sales.
+
+#### `y_AllStoreItem.sql`
+
+- **Purpose:** Creates every possible store-item combination.
+- **Business Value:** Ensures products with no purchase history are still included in the analysis, making missing orders easier to identify.
+
+#### `y_GFS_OrderGaps.sql`
+
+- **Purpose:** Calculates the time between consecutive orders for each product at each store.
+- **Business Value:** Reveals ordering frequency and helps identify unusually long gaps between purchases.
+
+#### `y_GFS_TotalStats.sql`
+
+- **Purpose:** Summarizes total order counts and quantities by store and product.
+- **Business Value:** Provides baseline purchasing statistics for subsequent analyses.
+
+#### `GFS_OrderCycle_ByItemStore.sql`
+
+- **Purpose:** Analyzes purchasing behavior at the individual store level.
+- **Business Value:**
+  - Calculates average monthly and weekly purchasing volumes based on each store's operating history.
+  - Flags newly opened stores that have insufficient history for evaluation.
+  - Identifies established stores that have stopped ordering specific products.
+
+#### `GFS_OrderCycle_ByItem_6M.sql`
+
+- **Purpose:** Summarizes ordering patterns across all active stores over the most recent six months.
+- **Business Value:** Provides a high-level view of purchasing frequency and product movement, supporting inventory planning and procurement decisions.
+
+> **Note:** Monthly and weekly averages in this report are calculated using a fixed six-month period. As a result, stores that opened recently may have slightly lower averages because inactive months are included in the calculation.
