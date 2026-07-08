@@ -36,8 +36,8 @@ The master registry of products and packaging components.
 ### 3. `Oursales_items` (Fact Table)
 Raw transactional data from the retail POS system capturing main product sales. 
 *   **`ID`** (AutoNumber / PK): Unique row identifier.
-*   **`Location`** (Short Text): Store name used in the GoParrot reports (linked operationally to `Store.OurName`).
-*   **`StoreCode`** (Short Text): GFS store code placeholder, updated via backend scripts to establish relational data alignment.
+*   **`Location`** (Short Text): Store name used in the GoParrot reports.
+*   **`StoreCode`** (Short Text / FK): The official GFS store identifier. Populated post-import via an automated `UPDATE` query joining `Oursales_items.Location` with `Store.OurName` to enforce downstream relational alignment.
 *   **`Item`** (Short Text): Main product name/category sourced from GoParrot.
 *   **`Variation`** (Short Text): Product size or specific variant from GoParrot.
 *   **`Category`** (Short Text): Product group classification from GoParrot.
@@ -52,7 +52,7 @@ Raw transactional data from the retail POS system capturing main product sales.
 Raw transactional data from the retail POS system capturing optional add-ons and toppings.
 *   **`ID`** (AutoNumber / PK): Unique row identifier.
 *   **`Location`** (Short Text): Store name used in the GoParrot reports.
-*   **`StoreCode`** (Short Text): GFS store code placeholder, updated via backend scripts.
+*   **`StoreCode`** (Short Text / FK): The official GFS store identifier. Populated post-import via an automated `UPDATE` query joining `Oursales_modifiers.Location` with `Store.OurName` to enforce downstream relational alignment.
 *   **`Modifier set`** (Short Text): Modifier group classification from GoParrot.
 *   **`Modifier`** (Short Text): Specific add-on or topping name from GoParrot.
 *   **`Qty sold`** (Number): Quantity of modifiers sold.
