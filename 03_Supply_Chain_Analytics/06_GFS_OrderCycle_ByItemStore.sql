@@ -1,7 +1,10 @@
 /*******************************************************************************
+OBJECT NAME:    GFS_OrderCycle_ByItemStore
 DESCRIPTION:    Executive Supply Chain View. Dynamically tracks store-level ordering 
                 gaps, lifetime volume, and normalized demand velocity (Monthly/Weekly).
                 Integrates automated exception handling to flag expansion bias.
+AUTHOR:         Sajava Chang
+DATE:           2026-07
 TYPE:           Core Supply Chain Analytics Pipeline
 DEPENDENCIES:   y_AllStoreItem, Store, y_GFS_OrderGaps, y_GFS_TotalStats
 *******************************************************************************/
@@ -75,6 +78,9 @@ FROM
     LEFT JOIN y_GFS_TotalStats AS Totals
         ON y_AllStoreItem.StoreCode = Totals.StoreCode
         AND y_AllStoreItem.ItemCode = Totals.ItemCode
+
+WHERE
+    Store.Active IS NOT NULL
 
 ORDER BY 
     y_AllStoreItem.StoreCode, 
