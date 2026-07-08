@@ -6,7 +6,7 @@ Note: All sensitive business data, proprietary store identities, and financial m
 
 ---
 
-## 🚀 Business Applications & Impact
+## Business Applications & Impact
 
 This analytics engine transitions operational workflows from manual spreadsheet checking to automated SQL-driven insights:
 
@@ -16,16 +16,18 @@ This analytics engine transitions operational workflows from manual spreadsheet 
 
 ---
 
+## Database Relationship Diagram
+
 ![Database Relationship Diagram](relationship_diagram.png)
 
-## 📌 Project Overview
+## Project Overview
 This project delivers an **operational SQL database solution** engineered for a multi-location **smoothie chain** to bridge the gap between B2C retail POS sales and B2B distributor logistics. 
 
 By unifying disparate data sources, this database serves as a single source of truth to drive multi-channel sales reconciliation, master data alignment, and distributor ordering cycle forecasting.
 
 ---
 
-## 🗂️ Core Database Schema & Data Dictionary
+## Core Database Schema & Data Dictionary
 
 The database consists of the following key tables, engineered with clean relational constraints and data governance principles:
 
@@ -86,7 +88,7 @@ B2B wholesale distribution data tracking physical product shipments.
 
 ---
 
-## 🛠️ Multi-Channel SQL ETL & Analytics Pipeline
+## Multi-Channel SQL ETL & Analytics Pipeline
 
 To bridge the gap between B2C retail transactions and B2B distributor logistics, this project implements a structural 3-stage SQL pipeline within MS Access. Below is the architectural blueprint of how data is cleansed, harmonized, and translated into supply chain intelligence.
 
