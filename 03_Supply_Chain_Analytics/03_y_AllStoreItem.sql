@@ -1,4 +1,5 @@
 -- =================================================================================
+-- Query Name: y_AllStoreItem
 -- Description: Generates a comprehensive Cartesian Product (CROSS JOIN) encompassing 
 --              every active store location and every master inventory item.
 -- Business Context: Serves as the critical baseline structural scaffold for advanced windowing 
