@@ -1,5 +1,21 @@
 # SalesDB: Multi-Channel Sales Reconciliation & Supply Chain Analytics
 
+---
+
+Note: All sensitive business data, proprietary store identities, and financial metrics have been completely randomized, scrubbed, or substituted with sample metrics to strictly comply with non-disclosure agreements (NDA) and protect data privacy.
+
+---
+
+## 🚀 Business Applications & Impact
+
+This analytics engine transitions operational workflows from manual spreadsheet checking to automated SQL-driven insights:
+
+1.  **Cross-Channel Quantity Reconciliation**: Unifies disparate naming conventions by mapping text-based retail sales data to standardized GFS ItemCodes, allowing direct comparison with physical wholesale shipment volumes.
+2.  **Automated Master Data Governance**: Implements automated exception monitoring to flag newly opened stores missing from the master registry, ensuring 100% data compliance before analysis.
+3.  **B2B Order Cycle Forecasting**: Simulates window functions using advanced relational queries to calculate historical ordering frequency (order gaps) per item per store, directly optimizing supply chain stock management.
+
+---
+
 ![Database Relationship Diagram](relationship_diagram.png)
 
 ## 📌 Project Overview
@@ -110,13 +126,3 @@ Moving beyond descriptive statistics, this final phase applies advanced statisti
 *   **`05_GFS_OrderCycle_ByItemStore.sql` (The Executive Dashboard View)**
     *   *Core Logic:* Aggregates sequence gaps over the Cartesian backbone using `DateDiff`, outputting `AvgGapMonths` (procurement frequency) and `MaxGapMonths` (peak supply risk).
     *   *Business Value:* Provides executive leadership with an empirical framework to optimize safety stock parameters, balance distributor Minimum Order Quantities (MOQs), and proactively mitigate stockout exposure before it hits the bottom line.
-
----
-
-## 🚀 Business Applications & Impact
-
-This analytics engine transitions operational workflows from manual spreadsheet checking to automated SQL-driven insights:
-
-1.  **Cross-Channel Quantity Reconciliation**: Unifies disparate naming conventions by mapping text-based retail sales data to standardized GFS ItemCodes, allowing direct comparison with physical wholesale shipment volumes.
-2.  **Automated Master Data Governance**: Implements automated exception monitoring to flag newly opened stores missing from the master registry, ensuring 100% data compliance before analysis.
-3.  **B2B Order Cycle Forecasting**: Simulates window functions using advanced relational queries to calculate historical ordering frequency (order gaps) per item per store, directly optimizing supply chain stock management.
