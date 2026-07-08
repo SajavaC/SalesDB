@@ -1,0 +1,17 @@
+/*******************************************************************************
+DESCRIPTION:    Compiles the absolute lifetime transactional baseline (total orders 
+                and aggregate quantities) per unique store-item allocation.
+DEPENDENCIES:   GFSsales (Base Table)
+USED BY:        GFS_OrderCycle_ByItemStore
+*******************************************************************************/
+
+SELECT
+    StoreCode,
+    ItemCode,
+    COUNT(*) AS OrderCount,
+    SUM(Qty) AS TotalQty
+FROM 
+    GFSsales
+GROUP BY 
+    StoreCode, 
+    ItemCode;
