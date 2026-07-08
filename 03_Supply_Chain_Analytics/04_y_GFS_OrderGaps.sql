@@ -1,4 +1,5 @@
 -- =================================================================================
+-- Query Name: y_GFS_OrderGaps
 -- Description: Simulates the SQL 'LEAD()' window function within an MS Access environment 
 --              using a high-performance Correlated Subquery.
 -- Business Context: In order cycle analysis, we must calculate the time elapsed between 
