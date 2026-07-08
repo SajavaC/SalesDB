@@ -177,7 +177,7 @@ The final stage produces reports that support both operational reviews and suppl
 
 - **Purpose:** Analyzes purchasing behavior at the individual store level.
 - **Business Value:**
-  - Calculates average monthly and weekly purchasing volumes based on each store's operating history.
+  - Calculates purchasing frequency, average monthly and weekly purchasing volumes based on each store's operating history.
   - Flags newly opened stores that have insufficient history for evaluation.
   - Identifies established stores that have stopped ordering specific products.
 
