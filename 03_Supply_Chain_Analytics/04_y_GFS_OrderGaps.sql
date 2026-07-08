@@ -7,7 +7,7 @@
 --                   native window function support, this query programmatically looks ahead 
 --                   by finding the absolute minimum month (MIN) that is strictly greater than 
 --                   the active record's month, isolating the next chronological purchase event.
--- USED BY:        GFS_OrderCycle_ByItemStore
+-- USED BY: GFS_OrderCycle_ByItemStore
 -- =================================================================================
 
 SELECT
