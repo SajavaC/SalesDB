@@ -127,7 +127,7 @@ The first stage focuses on preparing imported data and ensuring it is ready for 
 
 This stage converts sales data from different sources into a consistent format for comparison.
 
-#### `z_1CupBag.sql`, `z_12ozcup.sql`, `z_Granola.sql`
+#### `z_1CupBag.sql`, `z_12ozcup.sql`, `z_Granola.sql` (Select three products as examples from the full product range)
 
 - **Purpose:** Extract sales quantities for specific products and packaging materials from both main menu items and modifiers.
 - **Business Value:** Translates POS sales into estimated inventory consumption, allowing retail sales to be compared with wholesale purchases.
