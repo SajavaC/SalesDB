@@ -1,7 +1,8 @@
 /*******************************************************************************
-DESCRIPTION:    Compiles the absolute lifetime transactional baseline (total orders 
-                and aggregate quantities) per unique store-item allocation.
-USED BY:        GFS_OrderCycle_ByItemStore
+-- Query Name: y_GFS_TotalStats
+-- DESCRIPTION:    Compiles the absolute lifetime transactional baseline (total orders 
+                   and aggregate quantities) per unique store-item allocation.
+-- USED BY:        GFS_OrderCycle_ByItemStore
 *******************************************************************************/
 
 SELECT
