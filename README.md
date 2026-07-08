@@ -12,7 +12,7 @@ This analytics engine transitions operational workflows from manual spreadsheet 
 
 1.  **Cross-Channel Quantity Reconciliation**: Unifies disparate naming conventions by mapping text-based retail sales data to standardized GFS ItemCodes, allowing direct comparison with physical wholesale shipment volumes.
 2.  **Automated Master Data Governance**: Implements automated exception monitoring to flag newly opened stores missing from the master registry, ensuring 100% data compliance before analysis.
-3.  **B2B Order Cycle Forecasting**: Simulates window functions using advanced relational queries to calculate historical ordering frequency (order gaps) per item per store, directly optimizing supply chain stock management.
+3.  **B2B Order Cycle Forecasting**: Using advanced relational queries to calculate historical ordering frequency (order gaps) per item per store, directly optimizing supply chain stock management.
 
 ---
 
