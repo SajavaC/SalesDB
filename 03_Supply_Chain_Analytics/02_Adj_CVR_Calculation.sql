@@ -1,5 +1,4 @@
 -- =================================================================================
--- Query Name: 02_Adj_CVR_Calculation
 -- Description: Computes the dynamic conversion rate (Adj_CVR) per dollar of net sales 
 --              over a trailing 3-month window, incorporating operational adjustment factors.
 -- Business Context: Translates micro-level ingredient consumption into macro financial metrics.
