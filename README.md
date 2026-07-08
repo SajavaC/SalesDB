@@ -113,25 +113,37 @@ This phase focuses on rule extraction, merging disparate revenue streams, and st
     *   *Core Logic:* Integrates the B2C retail POS stream and B2B wholesaler logs into a unified table using打標分流 (`'OurSold'` vs `'GFSSold'`).
     *   *Supply Chain Formulation:* Implements a crucial conversion formula: `ROUND((Qty * Serving) / Size, 1)`. This translates consumer portion servings dynamically into standardized distributor shipment units (Cases), achieving a flawless apples-to-apples audit grid.
 
-### Stage 3: Supply Chain Predictive Analytics (`/03_Supply_Chain_Analytics`)
-Moving beyond descriptive statistics, this final phase applies advanced statistical modeling and sequencing logic to expose operational risks.
+### Stage 3: Supply Chain Predictive Analytics & Lifecycle Analytics (`/03_Supply_Chain_Analytics`)
+Moving beyond descriptive statistics, this final phase applies advanced statistical modeling and sequencing logic to expose operational risks. It provides dual-perspective visibility (micro store-level vs. macro product-level) to dynamically audit distributor pull velocity while isolating data anomalies caused by corporate expansion.
+
 *   **`01_Avg2Month_Rolling.sql`**
-    *   *Core Logic:* Uses a controlled `Self-Join` combined with `Nz()` boundary handling to compute a 60-day moving average.
+    *   *Core Logic:* Uses a controlled `Self-Join` combined with `NZ()` boundary handling to compute a 60-day moving average.
     *   *Business Value:* Smooths out short-term logistical noise, cargo delays, and transactional variance, establishing a reliable demand baseline.
+
 *   **`02_Adj_CVR_Calculation.sql`**
     *   *Core Logic:* Establishes a dynamic conversion rate (Adj_CVR) over a rolling 3-month window.
     *   *Business Value:* Scales physical depletion against aggregate revenue while factoring in an operational `AdjFactor` for store-level waste and shrinkage. It calculates the precise material footprint per dollar of sales, providing an automated foundation for rolling inventory forecasting.
+
 *   **`03_y_AllStoreItem.sql`**
     *   *Core Logic:* Generates a comprehensive Cartesian Product (`CROSS JOIN`) between all active stores and inventory items.
     *   *Business Value:* Creates a continuous reference grid (Master Grid) that forces "zero-order periods" (missing sequences) into visibility, preventing skipped orders from being silenced in the data.
+
 *   **`04_y_GFS_OrderGaps.sql`**
     *   *Core Logic:* Engineeringly replicates the analytical functionality of a native SQL `LEAD()` window function within an MS Access environment via a localized correlated subquery (`MIN(G2.Month) where G2.Month > G1.Month`).
+    *   *Business Value:* Exposes actual supply chain order frequencies and hidden out-of-stock gaps by measuring the exact time elapsed between sequential distributor pulls.
+
 *   **`05_y_GFS_TotalStats.sql`**
     *   *Core Logic:* Executes an aggregate `GROUP BY` to compile the absolute lifetime transactional baseline (`OrderCount` and `TotalQty`) mapped by each store-item allocation.
     *   *Business Value:* Serves as a vital staging summary that stabilizes volumetric calculations for downstream simulation logic, preventing performance bottlenecks in cross-join views.
-*   **`06_GFS_OrderCycle_ByItemStore.sql` (The Executive Dashboard View)**
-    *   *Core Logic:* A sophisticated multi-layered analytical query that dynamic injects temporal data metadata (`Store.Start`) to establish store lifespans (`MonthsSinceOpen`). It features inline subqueries evaluating dynamic rolling maximum periods `(SELECT Max(Month) FROM GFSsales)` to run true-time rate calculations.
+
+*   **`06_GFS_OrderCycle_ByItemStore.sql` (Micro Store-Level Analytics)**
+    *   *Core Logic:* A sophisticated multi-layered analytical query that dynamically injects temporal metadata (`Store.Start`) to establish true store lifespans (`MonthsSinceOpen`) while filtering for active accounts (`Store.Active IS NOT NULL`). It utilizes dynamic rolling maximum subqueries `(SELECT MAX(Month) FROM GFSsales)` to normalize demand velocity.
     *   *Advanced Dynamic Formulations:*
-        *   `AvgQtyPerMonth` & `AvgQtyPerWeek`: Dynamically scales total lifetime distributor pull volume against the specific store’s operational age rather than an arbitrary global time horizon. Implements `IIf` exception handling to eliminate division-by-zero errors.
-        *   Automated Lifecycle Flagging: Employs a nested conditional evaluation `IIf(SampleSize = 0, IIf(MonthsSinceOpen < 3, "Too New", "No Orders"), "")` to dynamically isolate data anomalies.
+        *   `AvgQtyPerMonth` & `AvgQtyPerWeek`: Dynamically scales total lifetime distributor pull volume against the specific store’s operational age rather than an arbitrary global time horizon (incorporates a standard `4.33` weeks/month multiplier).
+        *   Automated Lifecycle Flagging: Employs nested conditional evaluation `IIF(SampleSize = 0, IIF(MonthsSinceOpen < 3, "Too New", "No Orders"), "")` to dynamically isolate data anomalies.
     *   *Business Value:* Provides executive leadership with a self-calibrating audit framework. It automatically filters out newly opened expansion storefronts (`Too New`) from being falsely penalized as dormant, while instantly triggering red-flag alerts (`No Orders`) for mature distribution lines facing critical stockout risks.
+
+*   **`07_GFS_OrderCycle_ByItem_6M.sql` (Macro Product-Level 6-Month Rolling Forecast)**
+    *   *Core Logic:* Extracts a macro, aggregated product velocity pipeline by consolidating cross-store transaction records over a strict rolling 5-month historical lookback window plus the current month `DATEADD("m", -5, (SELECT MAX(Month) FROM GFSsales))`.
+    *   *Analytical Boundary Disclosure:* Dynamically flags model limitations. Because it utilizes a fixed 6-month denominator to establish macro baselines, it intentionally trade-offs individual store operational age for a standardized, high-level product movement snapshot.
+    *   *Business Value:* Serves as the primary baseline for Master Procurement Planning and vendor SLA auditing. By filtering out inactive locations and focusing on the immediate rolling 6-month product momentum, it provides the exact volumetric constraints needed for bulk-contract negotiation, lead-time safety stock configuration, and high-level distribution logistics auditing.
