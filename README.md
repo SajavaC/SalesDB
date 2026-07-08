@@ -39,6 +39,7 @@ The master registry of all store locations.
 *   **`City`** (Short Text): The city where the store is located.
 *   **`Province`** (Short Text): The province where the store is located.
 *   **`GFS_DC`** (Short Text): The GFS distribution center (DC) that supplies this store.
+*   **`Start`** (Date/Time): The date/time when the store was added to this database.
 *   **`Active`** (Short Text): Indicates whether the store is currently operating.
 *   **`Owned`** (Short Text): Indicates whether the store is company-owned.
 
@@ -125,6 +126,12 @@ Moving beyond descriptive statistics, this final phase applies advanced statisti
     *   *Business Value:* Creates a continuous reference grid (Master Grid) that forces "zero-order periods" (missing sequences) into visibility, preventing skipped orders from being silenced in the data.
 *   **`04_y_GFS_OrderGaps.sql`**
     *   *Core Logic:* Engineeringly replicates the analytical functionality of a native SQL `LEAD()` window function within an MS Access environment via a localized correlated subquery (`MIN(G2.Month) where G2.Month > G1.Month`).
-*   **`05_GFS_OrderCycle_ByItemStore.sql` (The Executive Dashboard View)**
-    *   *Core Logic:* Aggregates sequence gaps over the Cartesian backbone using `DateDiff`, outputting `AvgGapMonths` (procurement frequency) and `MaxGapMonths` (peak supply risk).
-    *   *Business Value:* Provides executive leadership with an empirical framework to optimize safety stock parameters, balance distributor Minimum Order Quantities (MOQs), and proactively mitigate stockout exposure before it hits the bottom line.
+*   **`05_y_GFS_TotalStats.sql`**
+    *   *Core Logic:* Executes an aggregate `GROUP BY` to compile the absolute lifetime transactional baseline (`OrderCount` and `TotalQty`) mapped by each store-item allocation.
+    *   *Business Value:* Serves as a vital staging summary that stabilizes volumetric calculations for downstream simulation logic, preventing performance bottlenecks in cross-join views.
+*   **`06_GFS_OrderCycle_ByItemStore.sql` (The Executive Dashboard View)**
+    *   *Core Logic:* A sophisticated multi-layered analytical query that dynamic injects temporal data metadata (`Store.Start`) to establish store lifespans (`MonthsSinceOpen`). It features inline subqueries evaluating dynamic rolling maximum periods `(SELECT Max(Month) FROM GFSsales)` to run true-time rate calculations.
+    *   *Advanced Dynamic Formulations:*
+        *   `AvgQtyPerMonth` & `AvgQtyPerWeek`: Dynamically scales total lifetime distributor pull volume against the specific store’s operational age rather than an arbitrary global time horizon. Implements `IIf` exception handling to eliminate division-by-zero errors.
+        *   Automated Lifecycle Flagging: Employs a nested conditional evaluation `IIf(SampleSize = 0, IIf(MonthsSinceOpen < 3, "Too New", "No Orders"), "")` to dynamically isolate data anomalies.
+    *   *Business Value:* Provides executive leadership with a self-calibrating audit framework. It automatically filters out newly opened expansion storefronts (`Too New`) from being falsely penalized as dormant, while instantly triggering red-flag alerts (`No Orders`) for mature distribution lines facing critical stockout risks.
