@@ -1,13 +1,18 @@
--- =================================================================================
--- Query Name: Adj_CVR_Calculation
--- Description: Computes the dynamic conversion rate (Adj_CVR) per dollar of net sales 
---              over a trailing 3-month window, incorporating operational adjustment factors.
--- Business Context: Translates micro-level ingredient consumption into macro financial metrics.
---                   By dividing total physical material usage (adjusted via AdjFactor for store
---                   waste and variance) by aggregate net revenue, this metric determines the 
---                   exact material footprint per dollar of sales, providing an automated foundation 
---                   for rolling inventory demand forecasting.
--- =================================================================================
+/*******************************************************************************
+Query Name:
+Adj_CVR_Calculation
+
+Purpose:
+Calculates the adjusted conversion rate between product consumption and net
+sales using the most recent three months of data.
+
+Business Value:
+Provides a consumption factor that estimates material usage based on recent
+sales performance, supporting demand forecasting and inventory planning.
+
+Used By:
+Demand Forecasting
+*******************************************************************************/
 
 SELECT 
     Item.ItemName,
