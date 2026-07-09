@@ -1,8 +1,17 @@
 /*******************************************************************************
--- Query Name: y_GFS_TotalStats
--- DESCRIPTION:    Compiles the absolute lifetime transactional baseline (total orders 
---                 and aggregate quantities) per unique store-item allocation.
--- USED BY: GFS_OrderCycle_ByItemStore
+Query Name:
+y_Distributor_TotalStats
+
+Purpose:
+Summarizes total purchase quantities and total order counts for each product at
+each store.
+
+Business Value:
+Provides baseline purchasing statistics used to calculate ordering frequency,
+average purchasing volume, and long-term purchasing behavior.
+
+Used By:
+Distributor_OrderCycle_ByItemStore
 *******************************************************************************/
 
 SELECT
@@ -11,7 +20,7 @@ SELECT
     COUNT(*) AS OrderCount,
     SUM(Qty) AS TotalQty
 FROM 
-    GFSsales
+    Distributorsales
 GROUP BY 
     StoreCode, 
     ItemCode;
