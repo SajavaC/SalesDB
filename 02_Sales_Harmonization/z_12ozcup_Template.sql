@@ -1,18 +1,24 @@
--- =================================================================================
--- Query Name: z_12ozcup_Template
--- Description: Translates beverage portion size sales into physical cold cup inventory
---              depletion under GFS ItemCode '1519306'.
--- Business Context: In a smoothie chain, a 12oz beverage sale directly corresponds to 
---                   the depletion of a 12oz cold cup packaging unit. This query filters 
---                   all 12oz retail transactions while applying strict exclusion rules 
---                   (omitting hot drinks and coffee) to isolate cold-beverage plastic cup consumption.
--- =================================================================================
+/*******************************************************************************
+Query Name:
+z_12ozcup_Template
+
+Purpose:
+Converts qualifying 12oz beverage sales into estimated 12oz cold cup
+consumption.
+
+Business Value:
+Calculates packaging usage based on retail sales while excluding products that
+do not consume cold cups, such as hot beverages.
+
+Used By:
+OurSoldQty
+*******************************************************************************/
 
 SELECT
     Store.StoreCode AS StoreCode,
     Store.City AS City,
     Store.Province AS Province,
-    '1519306' AS ItemCode,
+    'Demo_Code_001' AS ItemCode,
     Oursales_items.Month AS Month,
     SUM(Oursales_items.[Units sold]) AS Qty
 FROM Oursales_items 
