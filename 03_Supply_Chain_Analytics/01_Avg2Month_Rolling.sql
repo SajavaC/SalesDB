@@ -1,13 +1,18 @@
--- =================================================================================
--- Query Name: Avg2Month_Rolling
--- Description: Calculates a 60-day rolling moving average for multi-channel sales volume
---              by executing a controlled Self-Join on the combined sales dataset.
--- Business Context: Retail consumption and wholesale ordering are notoriously volatile 
---                   due to shipping delays and batch ordering patterns. This query applies 
---                   data smoothing logic, pairing the current month with the previous month 
---                   and utilizing the Nz() function to handle cold-start edge cases, providing 
---                   the supply chain with a stable baseline for inventory audits.
--- =================================================================================
+/*******************************************************************************
+Query Name:
+Avg2Month_Rolling
+
+Purpose:
+Calculates a rolling two-month average for product quantities by combining the
+current month's data with the previous month's results.
+
+Business Value:
+Reduces the impact of monthly purchasing fluctuations, providing a more stable
+baseline for comparing product consumption with purchasing activity.
+
+Used By:
+Monthly Sales vs Purchasing Analysis
+*******************************************************************************/
 
 SELECT
     A.StoreCode,
