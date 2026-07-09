@@ -1,21 +1,18 @@
-/*******************************************************************************
-Query Name:
-Distributor_OrderCycle_ByItemStore
+-- ===========================================================================================================================================================
+-- Query Name:
+-- Distributor_OrderCycle_ByItemStore
 
-Purpose:
-Analyzes purchasing behavior for each product at the individual store level,
-including ordering frequency, purchasing intervals, total purchases, and
-average weekly and monthly purchasing volumes.
+-- Purpose:
+-- Analyzes purchasing behavior for each product at the individual store level, including ordering frequency, purchasing intervals, total purchases, and
+-- average weekly and monthly purchasing volumes.
 
-Business Value:
-Provides store-level purchasing insights that help identify unusual ordering
-patterns, long gaps between purchases, and differences in purchasing behavior
-across stores. Newly opened stores are also flagged to avoid misleading
-comparisons.
+-- Business Value:
+-- Provides store-level purchasing insights that help identify unusual ordering patterns, long gaps between purchases, and differences in purchasing behavior
+-- across stores. Newly opened stores are also flagged to avoid misleading comparisons.
 
-Used By:
-Monthly Store Purchasing Behavior Report
-*******************************************************************************/
+-- Used By:
+-- Monthly Store Purchasing Behavior Report
+-- ===========================================================================================================================================================
 
 SELECT
     -- Basic Identification
