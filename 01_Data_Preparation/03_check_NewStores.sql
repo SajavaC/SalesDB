@@ -1,11 +1,18 @@
--- =================================================================================
--- Query Name: check_NewStores
--- Description: Exception monitoring query that identifies unmapped retail locations
---              where StoreCode remains NULL after the update process.
--- Business Context: Serves as an automated data governance check. If a new store opens 
---                   or a store name changes in GoParrot, this query flags it immediately, 
---                   preventing incomplete data from corrupting downstream inventory reconciliation.
--- =================================================================================
+/*******************************************************************************
+Query Name:
+check_NewStores
+
+Purpose:
+Identifies imported POS records whose store names cannot be matched to the
+master Store table.
+
+Business Value:
+Helps detect newly opened stores or store name changes before running monthly
+reports, preventing incomplete store mappings from affecting analysis.
+
+Used By:
+Manual data validation
+*******************************************************************************/
 
 SELECT 
     Location, 
