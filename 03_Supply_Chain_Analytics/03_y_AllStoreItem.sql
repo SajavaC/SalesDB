@@ -1,18 +1,16 @@
-/*******************************************************************************
-Query Name:
-y_AllStoreItem
+-- ===============================================================================================================================================================================
+-- Query Name:
+-- y_AllStoreItem
 
-Purpose:
-Generates every possible combination of active stores and inventory items.
+-- Purpose:
+-- Generates every possible combination of active stores and inventory items.
 
-Business Value:
-Ensures stores with no purchasing activity are still included in downstream
-analysis, making it possible to identify missing orders and calculate ordering
-patterns accurately.
+-- Business Value:
+-- Ensures stores with no purchasing activity are still included in downstream analysis, making it possible to identify missing orders and calculate ordering patterns accurately.
 
-Used By:
-Distributor_OrderCycle_ByItemStore
-*******************************************************************************/
+-- Used By:
+-- Distributor_OrderCycle_ByItemStore
+-- ===============================================================================================================================================================================
 
 SELECT
     Store.StoreCode,
