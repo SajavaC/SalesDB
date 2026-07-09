@@ -1,17 +1,16 @@
-/*******************************************************************************
-Query Name:
-Distributor_Monthly_Sales
+-- =========================================================================================================================================
+-- Query Name:
+-- Distributor_Monthly_Sales
 
-Purpose:
-Summarizes monthly distributor sales for each inventory item using a pivot table.
+-- Purpose:
+-- Summarizes monthly distributor sales for each inventory item using a pivot table.
 
-Business Value:
-Provides a quick month-by-month view of purchasing trends, helping support
-demand forecasting, inventory planning, and purchasing decisions.
+-- Business Value:
+-- Provides a quick month-by-month view of purchasing trends, helping support demand forecasting, inventory planning, and purchasing decisions.
 
-Used By:
-Monthly demand forecasting
-*******************************************************************************/
+-- Used By:
+-- Monthly demand forecasting
+-- =========================================================================================================================================
 
 TRANSFORM 
     SUM(Qty) AS TotalQty
