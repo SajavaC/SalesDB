@@ -1,19 +1,17 @@
-/*******************************************************************************
-Query Name:
-AllSales_Union
+-- ===========================================================================================================================================================
+-- Query Name:
+-- AllSales_Union
 
-Purpose:
-Combines POS sales data and distributor's purchasing records into a single standardized
-dataset.
+-- Purpose:
+-- Combines POS sales data and distributor's purchasing records into a single standardized dataset.
 
-Business Value:
-Converts retail sales into equivalent wholesale case quantities, making it
-possible to compare product consumption with purchasing activity across stores.
+-- Business Value:
+-- Converts retail sales into equivalent wholesale case quantities, making it possible to compare product consumption with purchasing activity across stores.
 
-Used By:
-Avg2Month_Rolling
-Adj_CVR_Calculation
-*******************************************************************************/
+-- Used By:
+-- Avg2Month_Rolling
+-- Adj_CVR_Calculation
+-- ===========================================================================================================================================================
 
 -- Channel 1: B2C Retail Sales Stream (Converted from portions into wholesale case equivalents)
 SELECT 
