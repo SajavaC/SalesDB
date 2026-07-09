@@ -1,21 +1,32 @@
 /*******************************************************************************
--- Query Name: GFS_OrderCycle_ByItemStore
--- DESCRIPTION: Executive Supply Chain View. Dynamically tracks store-level ordering 
---              gaps, lifetime volume, and normalized demand velocity (Monthly/Weekly).
---              Integrates automated exception handling to flag expansion bias.
--- DEPENDENCIES: y_AllStoreItem, Store, y_GFS_OrderGaps, y_GFS_TotalStats
+Query Name:
+Distributor_OrderCycle_ByItemStore
+
+Purpose:
+Analyzes purchasing behavior for each product at the individual store level,
+including ordering frequency, purchasing intervals, total purchases, and
+average weekly and monthly purchasing volumes.
+
+Business Value:
+Provides store-level purchasing insights that help identify unusual ordering
+patterns, long gaps between purchases, and differences in purchasing behavior
+across stores. Newly opened stores are also flagged to avoid misleading
+comparisons.
+
+Used By:
+Monthly Store Purchasing Behavior Report
 *******************************************************************************/
 
 SELECT
     -- Basic Identification
     y_AllStoreItem.StoreCode,
-    y_AllStoreItem.GFSName AS StoreName,
+    y_AllStoreItem.DistributorName AS StoreName,
     y_AllStoreItem.ItemCode,
     y_AllStoreItem.ItemName,
     
     -- Temporal Lifespan Metrics
     Store.Start AS StoreOpenDate,
-    DATEDIFF("m", Store.Start, (SELECT MAX(Month) FROM GFSsales)) + 1 AS MonthsSinceOpen,
+    DATEDIFF("m", Store.Start, (SELECT MAX(Month) FROM Distributorsales)) + 1 AS MonthsSinceOpen,
     
     -- Order Gap Analytics
     ROUND(Stats.AvgGapMonths, 1) AS AvgGapMonths,
@@ -27,19 +38,19 @@ SELECT
     NZ(Totals.TotalQty, 0) AS TotalQty,
     
     -- Dynamic Demand Velocity Formulas (Normalized by Store Age)
-    IIF(DATEDIFF("m", Store.Start, (SELECT MAX(Month) FROM GFSsales)) + 1 <= 0, 
+    IIF(DATEDIFF("m", Store.Start, (SELECT MAX(Month) FROM Distributorsales)) + 1 <= 0, 
         NULL,
-        ROUND(NZ(Totals.TotalQty, 0) / (DATEDIFF("m", Store.Start, (SELECT MAX(Month) FROM GFSsales)) + 1), 2)
+        ROUND(NZ(Totals.TotalQty, 0) / (DATEDIFF("m", Store.Start, (SELECT MAX(Month) FROM Distributorsales)) + 1), 2)
     ) AS AvgQtyPerMonth,
     
-    IIF(DATEDIFF("m", Store.Start, (SELECT MAX(Month) FROM GFSsales)) + 1 <= 0, 
+    IIF(DATEDIFF("m", Store.Start, (SELECT MAX(Month) FROM Distributorsales)) + 1 <= 0, 
         NULL,
-        ROUND(NZ(Totals.TotalQty, 0) / ((DATEDIFF("m", Store.Start, (SELECT MAX(Month) FROM GFSsales)) + 1) * 4.33), 2)
+        ROUND(NZ(Totals.TotalQty, 0) / ((DATEDIFF("m", Store.Start, (SELECT MAX(Month) FROM Distributorsales)) + 1) * 4.33), 2)
     ) AS AvgQtyPerWeek,
     
     -- Automated Exception Guardrail & Store Lifecycle Flagging
     IIF(NZ(Stats.SampleSize, 0) = 0,
-        IIF(DATEDIFF("m", Store.Start, (SELECT MAX(Month) FROM GFSsales)) < 3,
+        IIF(DATEDIFF("m", Store.Start, (SELECT MAX(Month) FROM Distributorsales)) < 3,
             "Too New",
             "No Orders"
         ),
@@ -56,23 +67,23 @@ FROM
         LEFT JOIN
             (
                 SELECT
-                    y_GFS_OrderGaps.StoreCode,
-                    y_GFS_OrderGaps.ItemCode,
+                    y_Distributor_OrderGaps.StoreCode,
+                    y_Distributor_OrderGaps.ItemCode,
                     AVG(DATEDIFF("m", ThisMonth, NextOrderMonth)) AS AvgGapMonths,
                     MAX(DATEDIFF("m", ThisMonth, NextOrderMonth)) AS MaxGapMonths,
                     COUNT(*) AS SampleSize
                 FROM 
-                    y_GFS_OrderGaps
+                    y_Distributor_OrderGaps
                 WHERE 
                     NextOrderMonth IS NOT NULL
                 GROUP BY 
-                    y_GFS_OrderGaps.StoreCode, 
-                    y_GFS_OrderGaps.ItemCode
+                    y_Distributor_OrderGaps.StoreCode, 
+                    y_Distributor_OrderGaps.ItemCode
             ) AS Stats
                 ON y_AllStoreItem.StoreCode = Stats.StoreCode
                 AND y_AllStoreItem.ItemCode = Stats.ItemCode
     )
-    LEFT JOIN y_GFS_TotalStats AS Totals
+    LEFT JOIN y_Distributor_TotalStats AS Totals
         ON y_AllStoreItem.StoreCode = Totals.StoreCode
         AND y_AllStoreItem.ItemCode = Totals.ItemCode
 
