@@ -1,24 +1,19 @@
-/*******************************************************************************
-Query Name:
-Distributor_OrderCycle_ByItem_6M
+-- ===============================================================================================================================================================================================
+-- Query Name:
+-- Distributor_OrderCycle_ByItem_6M
 
-Purpose:
-Summarizes purchasing behavior for each product across all stores over the most
-recent six months, including ordering frequency, purchasing intervals, and
-average purchasing volumes.
+-- Purpose:
+-- Summarizes purchasing behavior for each product across all stores over the most recent six months, including ordering frequency, purchasing intervals, and average purchasing volumes.
 
-Business Value:
-Provides a high-level view of product purchasing trends, supporting inventory
-planning, procurement decisions, and demand forecasting.
+-- Business Value:
+-- Provides a high-level view of product purchasing trends, supporting inventory planning, procurement decisions, and demand forecasting.
 
-Note:
-Monthly and weekly averages are calculated using a fixed six-month period.
-Stores that opened recently may have slightly lower averages because inactive
-months are included in the calculation.
+-- Note:
+-- Monthly and weekly averages are calculated using a fixed six-month period. Stores that opened recently may have slightly lower averages because inactive months are included in the calculation.
 
-Used By:
-Monthly Product Purchasing Summary
-*******************************************************************************/
+-- Used By:
+-- Monthly Product Purchasing Summary
+-- ===============================================================================================================================================================================================
 
 SELECT
     -- Product Identification
