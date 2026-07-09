@@ -1,18 +1,16 @@
-/*******************************************************************************
-Query Name:
-Distributor_Monthly_Sales_by_DC
+-- ==================================================================================================================================================
+-- Query Name:
+-- Distributor_Monthly_Sales_by_DC
 
-Purpose:
-Summarizes monthly distributor sales for each inventory item by distribution
-center using a pivot table.
+-- Purpose:
+-- Summarizes monthly distributor sales for each inventory item by distribution center using a pivot table.
 
-Business Value:
-Highlights regional purchasing patterns across distribution centers, supporting
-inventory allocation, demand forecasting, and purchasing planning.
+-- Business Value:
+-- Highlights regional purchasing patterns across distribution centers, supporting inventory allocation, demand forecasting, and purchasing planning.
 
-Used By:
-Monthly demand forecasting
-*******************************************************************************/
+-- Used By:
+-- Monthly demand forecasting
+-- ==================================================================================================================================================
 
 TRANSFORM 
     SUM(G.Qty) AS TotalQty
