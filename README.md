@@ -189,3 +189,24 @@ The final stage produces reports that support both operational reviews and suppl
 - **Business Value:** Provides a high-level view of purchasing frequency and product movement, supporting inventory planning and procurement decisions.
 
 > **Note:** Monthly and weekly averages in this report are calculated using a fixed six-month period. As a result, stores that opened recently may have slightly lower averages because inactive months are included in the calculation.
+
+### **Distributor_Monthly_Sales.sql**
+
+Creates a month-by-month summary of distributor sales for each inventory item
+using a pivot table.
+
+**Business Value**
+
+Provides a quick historical view of purchasing trends, serving as a practical
+reference when reviewing inventory movement and preparing demand forecasts.
+
+### **Distributor_Monthly_Sales_by_DC.sql**
+
+Summarizes monthly distributor sales by distribution center, allowing purchasing
+patterns to be compared across different regions.
+
+**Business Value**
+
+Supports inventory planning by highlighting regional demand differences and
+helping determine whether purchasing behavior varies between distribution
+centers.
