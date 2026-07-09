@@ -1,18 +1,16 @@
-/*******************************************************************************
-Query Name:
-Adj_CVR_Calculation
+-- ====================================================================================================================================================
+-- Query Name:
+-- Adj_CVR_Calculation
 
-Purpose:
-Calculates the adjusted conversion rate between product consumption and net
-sales using the most recent three months of data.
+-- Purpose:
+-- Calculates the adjusted conversion rate between product consumption and net sales using the most recent three months of data.
 
-Business Value:
-Provides a consumption factor that estimates material usage based on recent
-sales performance, supporting demand forecasting and inventory planning.
+-- Business Value:
+-- Provides a consumption factor that estimates material usage based on recent sales performance, supporting demand forecasting and inventory planning.
 
-Used By:
-Demand Forecasting
-*******************************************************************************/
+-- Used By:
+-- Demand Forecasting
+-- ====================================================================================================================================================
 
 SELECT 
     Item.ItemName,
