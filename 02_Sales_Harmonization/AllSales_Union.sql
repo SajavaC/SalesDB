@@ -1,18 +1,24 @@
--- =================================================================================
--- Query Name: AllSales_Union
--- Description: Unifies multi-channel data flows by aligning B2C retail POS consumption 
---              with B2B wholesaler (GFS) physical shipment volumes.
--- Business Context: This is the core analytics data engine. It bridges front-of-house 
---                   sales and back-of-house logistics. Most importantly, it executes a 
---                   supply chain formulation—ROUND((Qty * Serving) / Size, 1)—to convert 
---                   retail portion servings into standardized wholesale case units (Cases), 
---                   enabling a true apples-to-apples quantity comparison.
--- =================================================================================
+/*******************************************************************************
+Query Name:
+AllSales_Union
+
+Purpose:
+Combines POS sales data and distributor's purchasing records into a single standardized
+dataset.
+
+Business Value:
+Converts retail sales into equivalent wholesale case quantities, making it
+possible to compare product consumption with purchasing activity across stores.
+
+Used By:
+Avg2Month_Rolling
+Adj_CVR_Calculation
+*******************************************************************************/
 
 -- Channel 1: B2C Retail Sales Stream (Converted from portions into wholesale case equivalents)
 SELECT 
     OurSoldQty.StoreCode AS StoreCode, 
-    Store.GFSName AS StoreName,
+    Store.DistributorName AS StoreName,
     OurSoldQty.City AS City, 
     OurSoldQty.Province AS Province, 
     'OurSold' AS OrderedBy,
@@ -29,16 +35,16 @@ UNION ALL
 
 -- Channel 2: B2B Wholesaler Distribution Stream (Actual inventory cases shipped)
 SELECT
-    GFSsales.StoreCode AS StoreCode,
-    Store.GFSName AS StoreName,
+    Distributorsales.StoreCode AS StoreCode,
+    Store.DistributorName AS StoreName,
     Store.City AS City,
     Store.Province AS Province,
-    'GFSSold' AS OrderedBy,
-    GFSsales.ItemCode AS ItemCode,
+    'DistributorSold' AS OrderedBy,
+    Distributorsales.ItemCode AS ItemCode,
     Item.ItemName AS ItemName,
-    GFSsales.Month AS Month,
-    GFSsales.Qty AS SoldQty
+    Distributorsales.Month AS Month,
+    Distributorsales.Qty AS SoldQty
 FROM
-    (GFSsales
-    LEFT JOIN Store ON GFSsales.StoreCode = Store.StoreCode)
-    LEFT JOIN Item ON GFSsales.ItemCode = Item.ItemCode;
+    (Distributorsales
+    LEFT JOIN Store ON Distributorsales.StoreCode = Store.StoreCode)
+    LEFT JOIN Item ON Distributorsales.ItemCode = Item.ItemCode;
