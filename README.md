@@ -196,12 +196,12 @@ The final stage produces reports that support both operational reviews and suppl
 
 The following queries provide summarized purchasing views that I regularly use as reference when reviewing historical demand and preparing inventory forecasts.
 
-#### **Distributor_Monthly_Sales.sql**
+#### `Distributor_Monthly_Sales.sql`
 
 - **Purpose:** Creates a month-by-month summary of distributor sales for each inventory item using a pivot table.
 - **Business Value:** Provides a quick historical view of purchasing trends, serving as a practical reference when reviewing inventory movement and preparing demand forecasts.
 
-##### **Distributor_Monthly_Sales_by_DC.sql**
+##### `Distributor_Monthly_Sales_by_DC.sql`
 
 - **Purpose:** Summarizes monthly distributor sales by distribution center, allowing purchasing patterns to be compared across different regions.
 - **Business Value:** Supports inventory planning by highlighting regional demand differences and helping determine whether purchasing behavior varies between distribution centers.
