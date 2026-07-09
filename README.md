@@ -2,7 +2,7 @@
 
 ---
 
-Note: All sensitive business data, proprietary store identities, and financial metrics have been completely randomized, scrubbed, or substituted with sample metrics to strictly comply with non-disclosure agreements (NDA) and protect data privacy.
+Note: This public version preserves the database design and query logic while removing all original business data and sensitive information for privacy protection.
 
 ---
 
