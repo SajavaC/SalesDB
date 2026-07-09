@@ -1,18 +1,16 @@
-/*******************************************************************************
-Query Name:
-z_1CupBag_Template
+-- ============================================================================================================================
+-- Query Name:
+-- z_1CupBag_Template
 
-Purpose:
-Consolidates bag sales recorded as either main menu items or POS modifiers into
-a single inventory item.
+-- Purpose:
+-- Consolidates bag sales recorded as either main menu items or POS modifiers into a single inventory item.
 
-Business Value:
-Provides a complete view of packaging consumption by combining multiple sales
-paths into one standardized purchasing item.
+-- Business Value:
+-- Provides a complete view of packaging consumption by combining multiple sales paths into one standardized purchasing item.
 
-Used By:
-OurSoldQty
-*******************************************************************************/
+-- Used By:
+-- OurSoldQty
+-- ============================================================================================================================
 
 SELECT
     Store.StoreCode AS StoreCode,
