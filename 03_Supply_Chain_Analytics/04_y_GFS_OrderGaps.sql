@@ -1,19 +1,17 @@
-/*******************************************************************************
-Query Name:
-y_Distributor_OrderGaps
+-- ====================================================================================================================
+-- Query Name:
+-- y_Distributor_OrderGaps
 
-Purpose:
-Calculates the time between consecutive purchases for each product at each
-store.
+-- Purpose:
+-- Calculates the time between consecutive purchases for each product at each store.
 
-Business Value:
-Measures ordering intervals, providing the foundation for purchasing behavior
-analysis and order cycle calculations.
+-- Business Value:
+-- Measures ordering intervals, providing the foundation for purchasing behavior analysis and order cycle calculations.
 
-Used By:
-Distributor_OrderCycle_ByItemStore
-Distributor_OrderCycle_ByItem_6M
-*******************************************************************************/
+-- Used By:
+-- Distributor_OrderCycle_ByItemStore
+-- Distributor_OrderCycle_ByItem_6M
+-- ====================================================================================================================
 
 SELECT
     G1.StoreCode,
