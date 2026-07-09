@@ -1,18 +1,16 @@
-/*******************************************************************************
-Query Name:
-z_12ozcup_Template
+-- ================================================================================================================================
+-- Query Name:
+-- z_12ozcup_Template
 
-Purpose:
-Converts qualifying 12oz beverage sales into estimated 12oz cold cup
-consumption.
+-- Purpose:
+-- Converts qualifying 12oz beverage sales into estimated 12oz cold cup consumption.
 
-Business Value:
-Calculates packaging usage based on retail sales while excluding products that
-do not consume cold cups, such as hot beverages.
+-- Business Value:
+-- Calculates packaging usage based on retail sales while excluding products that do not consume cold cups, such as hot beverages.
 
-Used By:
-OurSoldQty
-*******************************************************************************/
+-- Used By:
+-- OurSoldQty
+-- ================================================================================================================================
 
 SELECT
     Store.StoreCode AS StoreCode,
