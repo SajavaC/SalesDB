@@ -1,17 +1,16 @@
-/*******************************************************************************
-Query Name:
-z_Granola
+-- ==============================================================================================================================================================
+-- Query Name:
+-- z_Granola
 
-Purpose:
-Converts Granola modifier sales into standardized inventory consumption.
+-- Purpose:
+-- Converts Granola modifier sales into standardized inventory consumption.
 
-Business Value:
-Aggregates topping selections from POS transactions into estimated raw material
-usage, allowing ingredient consumption to be compared with purchasing records.
+-- Business Value:
+-- Aggregates topping selections from POS transactions into estimated raw material usage, allowing ingredient consumption to be compared with purchasing records.
 
-Used By:
-OurSoldQty
-*******************************************************************************/
+-- Used By:
+-- OurSoldQty
+-- ==============================================================================================================================================================
 
 SELECT
     Store.StoreCode AS StoreCode,
