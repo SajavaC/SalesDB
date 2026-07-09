@@ -1,10 +1,18 @@
--- =================================================================================
--- Query Name: Update_Oursales_modifiers
--- Description: Populates GFS StoreCodes into the B2C retail modifiers fact table 
---              (Oursales_modifiers) using an INNER JOIN with the Store master table.
--- Business Context: Aligns customizable add-on and topping sales data with the correct 
---                   distributor store codes, ensuring accurate cross-channel consumption gaps.
--- =================================================================================
+/*******************************************************************************
+Query Name:
+Update_Oursales_modifiers
+
+Purpose:
+Updates StoreCode in the imported POS modifier sales table by matching store
+names with the master Store table.
+
+Business Value:
+Ensures modifier sales are assigned to the correct stores, allowing ingredient
+consumption to be analyzed together with purchasing data.
+
+Used By:
+AllSales_Union
+*******************************************************************************/
 
 UPDATE Oursales_modifiers
 INNER JOIN Store ON Oursales_modifiers.Location = Store.OurName
