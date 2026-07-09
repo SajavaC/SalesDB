@@ -1,18 +1,16 @@
-/*******************************************************************************
-Query Name:
-Avg2Month_Rolling
+-- ====================================================================================================================================================
+-- Query Name:
+-- Avg2Month_Rolling
 
-Purpose:
-Calculates a rolling two-month average for product quantities by combining the
-current month's data with the previous month's results.
+-- Purpose:
+-- Calculates a rolling two-month average for product quantities by combining the current month's data with the previous month's results.
 
-Business Value:
-Reduces the impact of monthly purchasing fluctuations, providing a more stable
-baseline for comparing product consumption with purchasing activity.
+-- Business Value:
+-- Reduces the impact of monthly purchasing fluctuations, providing a more stable baseline for comparing product consumption with purchasing activity.
 
-Used By:
-Monthly Sales vs Purchasing Analysis
-*******************************************************************************/
+-- Used By:
+-- Monthly Sales vs Purchasing Analysis
+-- ====================================================================================================================================================
 
 SELECT
     A.StoreCode,
