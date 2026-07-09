@@ -1,4 +1,4 @@
-<img width="166" height="25" alt="image" src="https://github.com/user-attachments/assets/3247eb6f-4c81-4da1-93af-cf144bb0d779" /># SalesDB: Multi-Channel Sales Reconciliation & Supply Chain Analytics
+# SalesDB: Multi-Channel Sales Reconciliation & Supply Chain Analytics
 
 ---
 
