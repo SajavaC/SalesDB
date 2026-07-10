@@ -10,7 +10,7 @@
 -- repository includes representative examples that demonstrate the overall ETL approach.
 
 -- Used By:
--- AllSales_Union
+-- AllSales_Union.sql
 -- ===========================================================================================================================================================
 
 SELECT * FROM z_12ozcup_Template
