@@ -10,7 +10,6 @@
 
 -- Used By:
 -- Distributor_OrderCycle_ByItemStore
--- Distributor_OrderCycle_ByItem_6M
 -- ====================================================================================================================
 
 SELECT
