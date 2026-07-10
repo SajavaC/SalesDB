@@ -1,4 +1,4 @@
--- ==============================================================================================================
+-- ==========================================================================================================================================================================================
 -- Query Name:
 -- Expected_Demand_Pattern
 --
@@ -6,13 +6,12 @@
 -- Calculates the average purchasing pattern for each product based on stores with normal ordering behavior.
 --
 -- Business Value:
--- Establishes a baseline purchasing pattern for each product, supporting demand forecasting and helping identify
--- stores whose purchasing behavior differs from the typical network average.
+-- Establishes a baseline purchasing pattern for each product, supporting demand forecasting and helping identify stores whose purchasing behavior differs from the typical network average.
 --
 -- Used By:
 -- Demand forecasting
 -- Store purchasing behavior analysis
--- ==============================================================================================================
+-- ==========================================================================================================================================================================================
 
 SELECT 
     ItemName,
