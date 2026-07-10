@@ -6,7 +6,7 @@
 -- Converts Granola modifier sales into standardized inventory consumption.
 
 -- Used By:
--- OurSoldQty
+-- OurSoldQty.sql
 -- ==============================================================================================================================================================
 
 SELECT
