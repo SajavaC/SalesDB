@@ -5,9 +5,6 @@
 -- Purpose:
 -- Converts Granola modifier sales into standardized inventory consumption.
 
--- Business Value:
--- Aggregates topping selections from POS transactions into estimated raw material usage, allowing ingredient consumption to be compared with purchasing records.
-
 -- Used By:
 -- OurSoldQty
 -- ==============================================================================================================================================================
