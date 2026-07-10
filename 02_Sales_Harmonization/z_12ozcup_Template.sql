@@ -5,9 +5,6 @@
 -- Purpose:
 -- Converts qualifying 12oz beverage sales into estimated 12oz cold cup consumption.
 
--- Business Value:
--- Calculates packaging usage based on retail sales while excluding products that do not consume cold cups, such as hot beverages.
-
 -- Used By:
 -- OurSoldQty
 -- ================================================================================================================================
