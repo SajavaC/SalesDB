@@ -10,7 +10,6 @@
 
 -- Used By:
 -- Monthly demand forecasting
--- Store purchasing behavior analysis
 -- =========================================================================================================================================
 
 TRANSFORM 
