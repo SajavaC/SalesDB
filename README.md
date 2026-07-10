@@ -113,12 +113,12 @@ This database follows a three-stage workflow that transforms raw sales data into
 
 The first stage focuses on preparing imported data and ensuring it is ready for analysis.
 
-#### `01_Update_Oursales_items.sql` & `02_Update_Oursales_modifiers.sql`
+#### `Update_Oursales_items.sql` & `Update_Oursales_modifiers.sql`
 
 - **Purpose:** Match store names from POS sales reports with the company's master store list.
 - **Business Value:** Automatically assigns the correct StoreCode to each sales record, ensuring that retail sales and distributor shipment data can be linked accurately.
 
-#### `03_check_NewStores.sql`
+#### `check_NewStores.sql`
 
 - **Purpose:** Identifies stores that appear in newly imported sales data but are not yet included in the master store table.
 - **Business Value:** Helps detect newly opened stores or store name changes before they affect reports and analysis.
@@ -189,6 +189,16 @@ The final stage produces reports that support both operational reviews and suppl
 - **Business Value:** Provides a high-level view of purchasing frequency and product movement, supporting inventory planning and procurement decisions.
 
 > **Note:** Monthly and weekly averages in this report are calculated using a fixed six-month period. As a result, stores that opened recently may have slightly lower averages because inactive months are included in the calculation.
+
+#### `No_Demand_Items.sql`
+
+- **Purpose:** Identifies products that have never been purchased by existing stores, excluding newly opened locations.
+- **Business Value:** Highlights items with little or no demand across the store network, helping identify products that may require assortment review, romotional support, or adjustments to purchasing plans.
+
+#### `Expected_Demand_Pattern.sql`
+
+- **Purpose:** Calculates the average purchasing behavior for each product using stores with normal ordering patterns.
+- **Business Value:** Provides a network-wide purchasing baseline by summarizing average ordering intervals and purchasing volumes. This serves as a practical reference for demand forecasting and for identifying stores whose purchasing behavior differs from the typical pattern.
 
 ---
 
