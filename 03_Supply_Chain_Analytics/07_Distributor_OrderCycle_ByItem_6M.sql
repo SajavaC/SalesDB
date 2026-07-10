@@ -12,7 +12,7 @@
 -- Monthly and weekly averages are calculated using a fixed six-month period. Stores that opened recently may have slightly lower averages because inactive months are included in the calculation.
 
 -- Used By:
--- Monthly Product Purchasing Summary
+-- Monthly Product Purchasing Summary Report
 -- ===============================================================================================================================================================================================
 
 SELECT
