@@ -9,7 +9,7 @@
 -- Ensures modifier sales are assigned to the correct stores, allowing ingredient consumption to be analyzed together with purchasing data.
 
 -- Used By:
--- AllSales_Union
+-- AllSales_Union.sql
 -- =========================================================================================================================================
 
 UPDATE Oursales_modifiers
