@@ -12,7 +12,7 @@ This project was originally created to solve a recurring operational reporting c
 
 Retail sales data from POS and wholesale shipment data from a wholesale distributor were stored in separate systems, making it difficult to compare product consumption with purchasing behavior. Preparing these analyses manually was time-consuming and difficult to maintain as the business continued to expand.
 
-To solve this problem, I designed this relational database in Microsoft Access to consolidate both data sources into a single data model. The database automates monthly reporting, supports operational analysis at the individual store level, and provides insights into product consumption, purchasing behavior, and inventory planning.
+To solve this problem, I designed this relational database in Microsoft Access to consolidate both data sources into a single data model. The database automates monthly reporting, supports both operational analysis and supply chain planning by providing insights into product consumption, purchasing behavior, and demand forecasting.
 
 Although built with Microsoft Access, the focus of this project is not the database platform itself, but designing a practical business solution that supports operational decision-making.
 
