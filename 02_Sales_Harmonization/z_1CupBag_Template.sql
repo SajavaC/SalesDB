@@ -5,9 +5,6 @@
 -- Purpose:
 -- Consolidates bag sales recorded as either main menu items or POS modifiers into a single inventory item.
 
--- Business Value:
--- Provides a complete view of packaging consumption by combining multiple sales paths into one standardized purchasing item.
-
 -- Used By:
 -- OurSoldQty
 -- ============================================================================================================================
