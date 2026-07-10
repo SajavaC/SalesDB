@@ -22,18 +22,24 @@ This database was not created as a technical exercise. It was built to eliminate
 
 ## Business Applications
 
-This database was designed to automate recurring operational analyses by combining retail sales data and wholesale shipment records into a single relational database.
+This database supports business analysis and decision-making by integrating retail sales data and wholesale purchase data to provide insights into product consumption, purchasing patterns, and supply chain planning.
 
 Its primary business applications include:
 
 1. **Sales & Purchasing Analysis**  
-   Consolidates retail sales data from the POS system with wholesale shipment records from the distributor, making it possible to compare product consumption with purchasing activity. This helps identify stores whose purchasing patterns differ significantly from their actual sales.
+   Analyzes retail sales performance against wholesale purchasing activity to understand product consumption patterns and identify differences between store demand and ordering behavior.
 
-2. **Master Data Validation**  
-   Automatically checks for newly opened stores or unmatched store names after each data import, ensuring all sales records are properly linked before analysis.
+2. **Product Consumption & Conversion Analysis**
+   Calculates product-level consumption metrics, including conversion rates, to evaluate how effectively purchased products are utilized across stores.
 
-3. **Store Purchasing Behavior Analysis**
-   Analyzes historical ordering frequency, purchasing intervals, and average consumption for each product at both the product and store level. These reports help Operations understand purchasing behavior while also supporting inventory planning.
+3. **Demand Planning & Inventory Support**
+   Aggregates monthly purchasing quantities by product, region, and distribution center to support demand forecasting, purchasing planning, and inventory management decisions.
+
+4. **Master Data Validation**
+   Validates store master data during each monthly import by identifying new stores, unmatched store names, and potential data mapping issues before analysis.
+
+5. **Store Purchasing Behavior Analysis**
+   Analyzes historical ordering frequency, purchasing intervals, and average product consumption at both store and product levels to support purchasing strategy and supply chain planning.
 
 ---
 
