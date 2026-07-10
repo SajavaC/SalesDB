@@ -9,8 +9,8 @@
 -- Measures ordering intervals, providing the foundation for purchasing behavior analysis and order cycle calculations.
 
 -- Used By:
--- Distributor_OrderCycle_ByItemStore
--- Distributor_OrderCycle_ByItem_6M
+-- Distributor_OrderCycle_ByItemStore.sql
+-- Distributor_OrderCycle_ByItem_6M.sql
 -- ====================================================================================================================
 
 SELECT
