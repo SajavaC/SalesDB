@@ -6,7 +6,7 @@
 -- Consolidates bag sales recorded as either main menu items or POS modifiers into a single inventory item.
 
 -- Used By:
--- OurSoldQty
+-- OurSoldQty.sql
 -- ============================================================================================================================
 
 SELECT
