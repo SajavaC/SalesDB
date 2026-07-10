@@ -113,7 +113,7 @@ Monthly aggregated wholesale purchase data provided by our distributors, showing
 
 ## SQL Reports
 
-This database follows a three-stage workflow that transforms raw sales data into information that supports day-to-day supply chain decisions.
+This database follows a three-stage workflow that transforms raw sales data into information that supports supply chain and operation decisions.
 
 ### Stage 1: Data Preparation & Validation
 
