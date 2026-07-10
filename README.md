@@ -156,12 +156,12 @@ This stage converts sales data from different sources into a consistent format f
 
 The final stage produces reports that support both operational reviews and supply chain planning.
 
-#### `Avg2Month.sql`
+#### `Avg2Month_Rolling.sql`
 
 - **Purpose:** Calculates a rolling two-month average for each product.
 - **Business Value:** Reduces the impact of monthly fluctuations and provides a more stable reference when reviewing purchasing behavior.
 
-#### `Adj_CVR.sql`
+#### `Adj_CVR_Calculation.sql`
 
 - **Purpose:** Calculates adjusted conversion rates based on recent sales performance.
 - **Business Value:** Supports demand planning by estimating material usage from projected sales.
