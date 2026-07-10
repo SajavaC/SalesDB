@@ -11,6 +11,7 @@
 --
 -- Used By:
 -- Demand forecasting
+-- Store purchasing behavior analysis
 -- ==============================================================================================================
 
 SELECT 
