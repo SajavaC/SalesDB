@@ -3,7 +3,7 @@
 -- Adj_CVR_Calculation
 
 -- Purpose:
--- Calculates the adjusted conversion rate between product consumption and net sales using the most recent three months of data.
+-- Calculates the adjusted conversion rate using sales performance data from the latest three months.
 
 -- Business Value:
 -- Provides a consumption factor that estimates material usage based on recent sales performance, supporting demand forecasting and inventory planning.
