@@ -9,7 +9,7 @@
 -- Provides baseline purchasing statistics used to calculate ordering frequency, average purchasing volume, and long-term purchasing behavior.
 
 -- Used By:
--- Distributor_OrderCycle_ByItemStore
+-- Distributor_OrderCycle_ByItemStore.sql
 -- ====================================================================================================================
 
 SELECT
