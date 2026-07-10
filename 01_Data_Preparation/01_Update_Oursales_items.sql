@@ -9,7 +9,7 @@
 -- Standardizes store identifiers so retail sales data can be accurately compared with distributor's purchasing records during downstream analysis.
 
 -- Used By:
--- AllSales_Union
+-- AllSales_Union.sql
 -- ==================================================================================================================================================
 
 UPDATE Oursales_items
