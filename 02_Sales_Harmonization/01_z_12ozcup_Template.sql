@@ -6,7 +6,7 @@
 -- Converts qualifying 12oz beverage sales into estimated 12oz cold cup consumption.
 
 -- Used By:
--- OurSoldQty
+-- OurSoldQty.sql
 -- ================================================================================================================================
 
 SELECT
