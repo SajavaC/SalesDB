@@ -159,12 +159,12 @@ The final stage produces reports that support both operational reviews and suppl
 #### `Avg2Month_Rolling.sql`
 
 - **Purpose:** Calculates a rolling two-month average for each product.
-- **Business Value:** Reduces the impact of monthly fluctuations and provides a more stable reference when reviewing purchasing behavior.
+- **Business Value:** Reduces the impact of monthly purchasing fluctuations, providing a more stable baseline for comparing product consumption with purchasing activity.
 
 #### `Adj_CVR_Calculation.sql`
 
-- **Purpose:** Calculates adjusted conversion rates based on recent sales performance.
-- **Business Value:** Supports demand planning by estimating material usage from projected sales.
+- **Purpose:** Calculates the adjusted conversion rate using sales performance data from the latest three months.
+- **Business Value:** Provides a consumption factor that estimates material usage based on recent sales performance, supporting demand forecasting and inventory planning.
 
 #### `y_AllStoreItem.sql`
 
