@@ -69,7 +69,7 @@ The master registry of products and packaging components.
 *   **`AdjFactor`** (Number): Adjustment factor used in conversion rate calculations based on historical experience.
 
 ### 3. `Oursales_items` (Fact Table)
-Raw transactional data from the retail POS system capturing main product sales. 
+Monthly aggregated sales data extracted from the POS system, showing the total quantities of items sold by each store. The data is imported into the Oursales_items Table monthly.
 *   **`ID`** (AutoNumber / PK): Unique row identifier.
 *   **`Location`** (Short Text): Store name used in the POS reports.
 *   **`StoreCode`** (Short Text / FK): The official distributor's store identifier. Populated post-import via an automated `UPDATE` query joining `Oursales_items.Location` with `Store.OurName` to enforce downstream relational alignment.
@@ -84,7 +84,7 @@ Raw transactional data from the retail POS system capturing main product sales.
 *   **`Month`** (Date/Time): Transactional period. Uses the first day of each month (e.g., `2026/01/01`) to represent the month.
 
 ### 4. `Oursales_modifiers` (Fact Table)
-Raw transactional data from the retail POS system capturing optional add-ons and toppings.
+Monthly aggregated sales data extracted from the POS system, showing the total quantities of modifiers selected by customers at each store. The data is imported into the Oursales_modifiers Table monthly.
 *   **`ID`** (AutoNumber / PK): Unique row identifier.
 *   **`Location`** (Short Text): Store name used in the POS reports.
 *   **`StoreCode`** (Short Text / FK): The official distributor's store identifier. Populated post-import via an automated `UPDATE` query joining `Oursales_modifiers.Location` with `Store.OurName` to enforce downstream relational alignment.
@@ -96,7 +96,7 @@ Raw transactional data from the retail POS system capturing optional add-ons and
 *   **`Month`** (Date/Time): Transactional period, formatted using the first day of the month.
 
 ### 5. `Distributorsales` (Fact Table)
-B2B wholesale distribution data tracking physical product shipments.
+Monthly aggregated wholesale purchase data provided by our distributors, showing the total quantities of items purchased by each store. The data is imported into the Distributorsales Table monthly.
 *   **`ID`** (AutoNumber / PK): Unique row identifier.
 *   **`StoreCode`** (Short Text): The distributor's store identification code (Foreign Key to `Store.StoreCode`).
 *   **`ItemCode`** (Short Text): The official distributor's item identifier (Foreign Key to `Item.ItemCode`).
