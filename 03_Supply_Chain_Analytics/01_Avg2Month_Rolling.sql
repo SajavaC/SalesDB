@@ -9,7 +9,7 @@
 -- Reduces the impact of monthly purchasing fluctuations, providing a more stable baseline for comparing product consumption with purchasing activity.
 
 -- Used By:
--- Monthly Sales vs Purchasing Analysis
+-- Store purchasing behavior analysis
 -- ====================================================================================================================================================
 
 SELECT
