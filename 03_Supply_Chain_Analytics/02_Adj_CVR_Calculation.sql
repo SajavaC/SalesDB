@@ -9,7 +9,7 @@
 -- Provides a consumption factor that estimates material usage based on recent sales performance, supporting demand forecasting and inventory planning.
 
 -- Used By:
--- Demand Forecasting
+-- Monthly demand forecasting
 -- ====================================================================================================================================================
 
 SELECT 
