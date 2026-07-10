@@ -9,8 +9,8 @@
 -- Converts retail sales into equivalent wholesale case quantities, making it possible to compare product consumption with purchasing activity across stores.
 
 -- Used By:
--- Avg2Month_Rolling
--- Adj_CVR_Calculation
+-- Avg2Month_Rolling.sql
+-- Adj_CVR_Calculation.sql
 -- ===========================================================================================================================================================
 
 -- Channel 1: B2C Retail Sales Stream (Converted from portions into wholesale case equivalents)
