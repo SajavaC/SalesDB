@@ -17,4 +17,4 @@ SELECT * FROM z_12ozcup_Template
 UNION ALL
 SELECT * FROM z_1CupBag_Template
 UNION ALL
-SELECT * FROM z_Granola;
+SELECT * FROM z_Granola_Template;
