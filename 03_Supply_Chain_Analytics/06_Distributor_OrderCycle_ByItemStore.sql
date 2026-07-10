@@ -11,8 +11,8 @@
 -- across stores. Newly opened stores are also flagged to avoid misleading comparisons.
 
 -- Used By:
--- Expected_Demand_Pattern
--- No_Demand_Items
+-- Expected_Demand_Pattern.sql
+-- No_Demand_Items.sql
 -- Monthly Store Purchasing Behavior Report
 -- ===========================================================================================================================================================
 
