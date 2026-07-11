@@ -199,21 +199,25 @@ The final stage produces reports that support both operational reviews and suppl
 #### `No_Demand_Items.sql`
 
 - **Purpose:** Identifies products that have never been purchased by existing stores, excluding newly opened locations.
+
 | Column | Description |
 |---------|-------------|
 | ItemName | Product name |
 | NeverOrderedStoreCount | Number of existing stores that have never ordered the item |
+
 - **Business Value:** Highlights items with little or no demand across the store network, helping identify products that may require assortment review, romotional support, or adjustments to purchasing plans.
 
 #### `Expected_Demand_Pattern.sql`
 
 - **Purpose:** Calculates the average purchasing behavior for each product using stores with normal ordering patterns.
-  | Column | Description |
+- 
+| Column | Description |
 |---------|-------------|
 | ItemName | Product name |
 | AvgGapMonths_ALL | Average months between purchases |
 | AvgQtyPerMonth_ALL | Average monthly purchase quantity |
 | AvgQtyPerWeek_ALL | Average weekly purchase quantity |
+
 - **Business Value:** Provides a network-wide purchasing baseline by summarizing average ordering intervals and purchasing volumes. This serves as a practical reference for demand forecasting and for identifying stores whose purchasing behavior differs from the typical pattern.
 
 ---
