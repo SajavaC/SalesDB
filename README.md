@@ -200,6 +200,8 @@ The final stage produces reports that support both operational reviews and suppl
 
 - **Purpose:** Identifies products that have never been purchased by existing stores, excluding newly opened locations.
 
+- **Output:**
+
 | Column | Description |
 |---------|-------------|
 | ItemName | Product name |
@@ -211,6 +213,8 @@ The final stage produces reports that support both operational reviews and suppl
 
 - **Purpose:** Calculates the average purchasing behavior for each product using stores with normal ordering patterns.
 - 
+- **Output:**
+
 | Column | Description |
 |---------|-------------|
 | ItemName | Product name |
