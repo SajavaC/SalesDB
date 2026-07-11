@@ -120,13 +120,11 @@ This database follows a three-stage workflow that transforms raw sales data into
 The first stage focuses on preparing imported data and ensuring it is ready for analysis.
 
 #### `Update_Oursales_items.sql` & `Update_Oursales_modifiers.sql`
-
-- **Purpose:** Match store names from POS sales reports with the company's master store list.
+Match store names from POS sales reports with the company's master store list.
 - **Business Value:** Automatically assigns the correct StoreCode to each sales record, ensuring that retail sales and distributor shipment data can be linked accurately.
 
 #### `check_NewStores.sql`
-
-- **Purpose:** Identifies stores that appear in newly imported sales data but are not yet included in the master store table.
+Identifies stores that appear in newly imported sales data but are not yet included in the master store table.
 - **Business Value:** Helps detect newly opened stores or store name changes before they affect reports and analysis.
 
 ---
@@ -136,18 +134,15 @@ The first stage focuses on preparing imported data and ensuring it is ready for 
 This stage converts sales data from different sources into a consistent format for comparison.
 
 #### `z_1CupBag.sql`, `z_12ozcup.sql`, `z_Granola.sql` (Select three products as examples from the full product range)
-
-- **Purpose:** Extract sales quantities for specific products and packaging materials from both main menu items and modifiers.
+ Extract sales quantities for specific products and packaging materials from both main menu items and modifiers.
 - **Business Value:** Translates POS sales into estimated inventory consumption, allowing retail sales to be compared with wholesale purchases.
 
 #### `OurSoldQty.sql`
-
-- **Purpose:** Combines individual product queries into a single dataset.
+Combines individual product queries into a single dataset.
 - **Business Value:** Creates a standardized sales table that serves as the foundation for downstream analysis.
 
 #### `AllSales.sql`
-
-- **Purpose:** Combines estimated product consumption from POS with actual shipment records from the distributor.
+Combines estimated product consumption from POS with actual shipment records from the distributor.
 - **Business Value:** Provides a unified view that makes it easy to compare what stores sold versus what they ordered from the distributor.
 
 ---
@@ -157,50 +152,40 @@ This stage converts sales data from different sources into a consistent format f
 The final stage produces reports that support both operational reviews and supply chain planning.
 
 #### `Avg2Month_Rolling.sql`
-
-- **Purpose:** Calculates a rolling two-month average for each product.
+Calculates a rolling two-month average for each product.
 - **Business Value:** Reduces the impact of monthly purchasing fluctuations, providing a more stable baseline for comparing product consumption with purchasing activity.
 
 #### `Adj_CVR_Calculation.sql`
-
-- **Purpose:** Calculates the adjusted conversion rate using sales performance data from the latest three months.
+Calculates the adjusted conversion rate using sales performance data from the latest three months.
 - **Business Value:** Provides a consumption factor that estimates material usage based on recent sales performance, supporting demand forecasting and inventory planning.
 
 #### `y_AllStoreItem.sql`
-
-- **Purpose:** Creates every possible store-item combination.
+Creates every possible store-item combination.
 - **Business Value:** Ensures products with no purchase history are still included in the analysis, making missing orders easier to identify.
 
 #### `y_Distributor_OrderGaps.sql`
-
-- **Purpose:** Calculates the time between consecutive orders for each product at each store.
+Calculates the time between consecutive orders for each product at each store.
 - **Business Value:** Reveals ordering frequency and helps identify unusually long gaps between purchases.
 
 #### `y_Distributor_TotalStats.sql`
-
-- **Purpose:** Summarizes total order counts and quantities by store and product.
+Summarizes total order counts and quantities by store and product.
 - **Business Value:** Provides baseline purchasing statistics for subsequent analyses.
 
 #### `Distributor_OrderCycle_ByItemStore.sql`
-
-- **Purpose:** Analyzes purchasing behavior at the individual store level.
+Analyzes purchasing behavior at the individual store level.
 - **Business Value:**
   - Calculates purchasing frequency, average monthly and weekly purchasing volumes based on each store's operating history.
   - Flags newly opened stores that have insufficient history for evaluation.
   - Identifies established stores that have stopped ordering specific products.
 
 #### `Distributor_OrderCycle_ByItem_6M.sql`
-
-- **Purpose:** Summarizes ordering patterns across all active stores over the most recent six months.
+Summarizes ordering patterns across all active stores over the most recent six months.
 - **Business Value:** Provides a high-level view of purchasing frequency and product movement, supporting inventory planning and procurement decisions.
 
 > **Note:** Monthly and weekly averages in this report are calculated using a fixed six-month period. As a result, stores that opened recently may have slightly lower averages because inactive months are included in the calculation.
 
 #### `No_Demand_Items.sql`
-
-- **Purpose:** Identifies products that have never been purchased by existing stores, excluding newly opened locations.
-
-- **Output:**
+Identifies products that have never been purchased by existing stores, excluding newly opened locations.
 
 | Column | Description |
 |---------|-------------|
@@ -210,10 +195,7 @@ The final stage produces reports that support both operational reviews and suppl
 - **Business Value:** Highlights items with little or no demand across the store network, helping identify products that may require assortment review, romotional support, or adjustments to purchasing plans.
 
 #### `Expected_Demand_Pattern.sql`
-
-- **Purpose:** Calculates the average purchasing behavior for each product using stores with normal ordering patterns.
-- 
-- **Output:**
+Calculates the average purchasing behavior for each product using stores with normal ordering patterns.
 
 | Column | Description |
 |---------|-------------|
@@ -231,11 +213,9 @@ The final stage produces reports that support both operational reviews and suppl
 The following queries provide summarized purchasing views that I regularly use as reference when reviewing historical demand and preparing inventory forecasts.
 
 #### `Distributor_Monthly_Sales.sql`
-
-- **Purpose:** Creates a month-by-month summary of distributor sales for each inventory item using a pivot table.
+Creates a month-by-month summary of distributor sales for each inventory item using a pivot table.
 - **Business Value:** Provides a quick historical view of purchasing trends, serving as a practical reference when reviewing inventory movement and preparing demand forecasts.
 
 ##### `Distributor_Monthly_Sales_by_DC.sql`
-
-- **Purpose:** Summarizes monthly distributor sales by distribution center, allowing purchasing patterns to be compared across different regions.
+Summarizes monthly distributor sales by distribution center, allowing purchasing patterns to be compared across different regions.
 - **Business Value:** Supports inventory planning by highlighting regional demand differences and helping determine whether purchasing behavior varies between distribution centers.
