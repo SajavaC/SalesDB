@@ -159,10 +159,38 @@ The final stage produces reports that support both operational reviews and suppl
 #### `Avg2Month_Rolling.sql`
 Calculates a rolling two-month average for each product.
 
+**Output**
+
+One row per **Store–Product–Month** combination.
+
+| Column | Description |
+|---------|-------------|
+| StoreCode | Distributor store code |
+| StoreName | Store name |
+| City | Store city |
+| Province | Store province |
+| OrderedBy | Sales source (Retail POS or Distributor) |
+| ItemCode | Distributor item code |
+| ItemName | Product name |
+| Month | Current reporting month |
+| PrevMonth | Previous reporting month |
+| PrevQty | Quantity from the previous month |
+| SoldQty | Quantity for the current month |
+| Avg2Month | Two-month rolling average quantity |
+
 **Business Value:** Reduces the impact of monthly purchasing fluctuations, providing a more stable baseline for comparing product consumption with purchasing activity.
 
 #### `Adj_CVR_Calculation.sql`
 Calculates the adjusted conversion rate using sales performance data from the latest three months.
+
+**Output**
+
+One row per **Product**.
+
+| Column | Description |
+|---------|-------------|
+| ItemName | Product name |
+| Adj_CVR | Adjusted consumption rate per dollar of net sales, used as the forecasting baseline |
 
 **Business Value:** Provides a consumption factor that estimates material usage based on recent sales performance, supporting demand forecasting and inventory planning.
 
@@ -184,6 +212,25 @@ Summarizes total order counts and quantities by store and product.
 #### `Distributor_OrderCycle_ByItemStore.sql`
 Analyzes purchasing behavior at the individual store level.
 
+**Output**
+
+One row per **Store–Product** combination.
+
+| Column | Description |
+|---------|-------------|
+| StoreCode | Distributor store code |
+| StoreName | Store name |
+| ItemCode | Distributor item code |
+| ItemName | Product name |
+| AvgGapMonths | Average months between consecutive orders |
+| MaxGapMonths | Longest interval between consecutive orders |
+| SampleSize | Number of order intervals used in the calculation |
+| OrderCount | Total number of orders placed |
+| TotalQty | Total quantity purchased |
+| AvgQtyPerMonth | Average monthly purchase quantity (adjusted for store age) |
+| AvgQtyPerWeek | Average weekly purchase quantity (adjusted for store age) |
+| Flag | Indicates stores that are too new or have never placed an order |
+
 **Business Value:**
   - Calculates purchasing frequency, average monthly and weekly purchasing volumes based on each store's operating history.
   - Flags newly opened stores that have insufficient history for evaluation.
@@ -191,6 +238,22 @@ Analyzes purchasing behavior at the individual store level.
 
 #### `Distributor_OrderCycle_ByItem_6M.sql`
 Summarizes ordering patterns across all active stores over the most recent six months.
+
+**Output**
+
+One row per **Product**.
+
+| Column | Description |
+|---------|-------------|
+| ItemCode | Distributor item code |
+| ItemName | Product name |
+| AvgGapMonths | Average months between orders during the last 6 months |
+| MaxGapMonths | Longest ordering interval during the last 6 months |
+| SampleSize | Number of order intervals included in the calculation |
+| OrderCount | Total number of orders during the last 6 months |
+| TotalQty | Total quantity purchased during the last 6 months |
+| AvgQtyPerMonth | Average monthly purchase quantity |
+| AvgQtyPerWeek | Average weekly purchase quantity |
 
 **Business Value:** Provides a high-level view of purchasing frequency and product movement, supporting inventory planning and procurement decisions.
 
@@ -200,6 +263,8 @@ Summarizes ordering patterns across all active stores over the most recent six m
 Identifies products that have never been purchased by existing stores, excluding newly opened locations.
 
 **Output**
+
+One row per **Product**.
 
 | Column | Description |
 |---------|-------------|
@@ -212,6 +277,8 @@ Identifies products that have never been purchased by existing stores, excluding
 Calculates the average purchasing behavior for each product using stores with normal ordering patterns.
 
 **Output**
+
+One row per **Product**.
 
 | Column | Description |
 |---------|-------------|
@@ -231,9 +298,29 @@ The following queries provide summarized purchasing views that I regularly use a
 #### `Distributor_Monthly_Sales.sql`
 Creates a month-by-month summary of distributor sales for each inventory item using a pivot table.
 
+**Output**
+
+One row per **Product**, with monthly purchase quantities displayed as columns.
+
+| Column | Description |
+|---------|-------------|
+| ItemCode | Distributor item code |
+| ItemName | Product name |
+| Jan, Feb, Mar... | Total quantity purchased in each month |
+
 **Business Value:** Provides a quick historical view of purchasing trends, serving as a practical reference when reviewing inventory movement and preparing demand forecasts.
 
 ##### `Distributor_Monthly_Sales_by_DC.sql`
 Summarizes monthly distributor sales by distribution center, allowing purchasing patterns to be compared across different regions.
+
+**Output**
+
+One row per **Product–Distribution Center** combination, with monthly purchase quantities displayed as columns.
+
+| Column | Description |
+|---------|-------------|
+| ItemName | Product name |
+| DC | Distribution center |
+| Jan, Feb, Mar... | Total quantity purchased in each month for the selected distribution center |
 
 **Business Value:** Supports inventory planning by highlighting regional demand differences and helping determine whether purchasing behavior varies between distribution centers.
