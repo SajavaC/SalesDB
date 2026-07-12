@@ -1,0 +1,28 @@
+-- =========================================================================================================================================
+-- Query Name:
+-- Distributor_Monthly_Sales
+
+-- Purpose:
+-- Summarizes monthly distributor sales for each inventory item using a pivot table.
+
+-- Business Value:
+-- Provides a quick month-by-month view of purchasing trends, helping support demand forecasting, inventory planning, and purchasing decisions.
+
+-- Used By:
+-- Monthly demand forecasting
+-- =========================================================================================================================================
+
+TRANSFORM 
+    SUM(Qty) AS TotalQty
+SELECT 
+    [Distributorsales].ItemCode AS ItemCode, 
+    ItemName
+FROM 
+    Item 
+    INNER JOIN Distributorsales 
+        ON Item.ItemCode = [Distributorsales].ItemCode
+GROUP BY 
+    [Distributorsales].ItemCode, 
+    ItemName
+PIVOT 
+    Month;
