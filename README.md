@@ -205,6 +205,7 @@ Provides baseline purchasing statistics for subsequent analyses.
 
 These analytical queries transform normalized data into decision-support reports used for demand forecasting, purchasing analysis, and operational monitoring.
 
+<br>
 
 > 📈 **Demand Forecasting**
 
@@ -254,6 +255,7 @@ One row per **Product**.
 
 Provides a consumption factor that estimates material usage based on recent sales performance, supporting demand forecasting and inventory planning.
 
+<br>
 
 #### `Expected_Demand_Pattern.sql`
 
@@ -274,6 +276,8 @@ One row per **Product**.
 
 Provides a network-wide purchasing baseline by summarizing average ordering intervals and purchasing volumes. This serves as a practical reference for demand forecasting and for identifying stores whose purchasing behavior differs from the typical pattern.
 
+<br>
+<br>
 
 > 📦 **Purchasing Behavior**
 
@@ -308,6 +312,7 @@ One row per **Store–Product** combination.
   - 
   - Identifies established stores that have stopped ordering specific products.
 
+<br>
 
 #### `Distributor_OrderCycle_ByItem_6M.sql`
 
@@ -335,6 +340,7 @@ Provides a high-level view of purchasing frequency and product movement, support
 
 ##### **Note:** Monthly and weekly averages in this report are calculated using a fixed six-month period. As a result, stores that opened recently may have slightly lower averages because inactive months are included in the calculation.
 
+<br>
 
 #### `No_Demand_Items.sql`
 
@@ -353,6 +359,8 @@ One row per **Product**.
 
 Highlights items with little or no demand across the store network, helping identify products that may require assortment review, romotional support, or adjustments to purchasing plans.
 
+<br>
+<br>
 
 > 📊 **Monitoring Reports**
 
@@ -374,6 +382,7 @@ One row per **Product**, with monthly purchase quantities displayed as columns.
 
 Provides a quick historical view of purchasing trends, serving as a practical reference when reviewing inventory movement and preparing demand forecasts.
 
+<br>
 
 ##### `Distributor_Monthly_Sales_by_DC.sql`
 
