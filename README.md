@@ -235,6 +235,7 @@ One row per **Store–Product–Month** combination.
 
 Reduces the impact of monthly purchasing fluctuations, providing a more stable baseline for comparing product consumption with purchasing activity.
 
+<br>
 
 #### `Adj_CVR_Calculation.sql`
 
