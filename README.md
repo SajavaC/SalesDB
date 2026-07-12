@@ -231,7 +231,7 @@ One row per **Product**.
 **Business Value:** Provides a network-wide purchasing baseline by summarizing average ordering intervals and purchasing volumes. This serves as a practical reference for demand forecasting and for identifying stores whose purchasing behavior differs from the typical pattern.
 
 
-> 🛒 **Purchasing Behavior**
+> 📦 **Purchasing Behavior**
 
 #### `Distributor_OrderCycle_ByItemStore.sql`
 Analyzes purchasing behavior at the individual store level.
