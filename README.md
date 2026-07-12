@@ -115,9 +115,9 @@ Monthly aggregated wholesale purchase data provided by our distributors, showing
 
 This database follows a three-stage workflow that transforms raw sales data into information that supports supply chain and operation decisions.
 
-### Stage 1: Data Preparation & Validation
+### Stage 1: ETL & Data Preparation
 
-The first stage focuses on preparing imported data and ensuring it is ready for analysis.
+These queries import, standardize, and transform data from multiple business systems into a unified dataset ready for analysis.
 
 #### `Update_Oursales_items.sql` & `Update_Oursales_modifiers.sql`
 Match store names from POS sales reports with the company's master store list.
@@ -128,12 +128,6 @@ Match store names from POS sales reports with the company's master store list.
 Identifies stores that appear in newly imported sales data but are not yet included in the master store table.
 
 **Business Value:** Helps detect newly opened stores or store name changes before they affect reports and analysis.
-
----
-
-### Stage 2: Sales Consolidation & Data Transformation
-
-This stage converts sales data from different sources into a consistent format for comparison.
 
 #### `z_1CupBag.sql`, `z_12ozcup.sql`, `z_Granola.sql` (Select three products as examples from the full product range)
  Extract sales quantities for specific products and packaging materials from both main menu items and modifiers.
@@ -152,9 +146,35 @@ Combines estimated product consumption from POS with actual shipment records fro
 
 ---
 
-### Stage 3: Operational & Supply Chain Analysis
+### Stage 2: Analytics Engine
 
-The final stage produces reports that support both operational reviews and supply chain planning.
+These intermediate queries prepare reusable analytical datasets that are shared across multiple business reports.
+
+Unlike the final reports, these queries are not designed for direct business consumption. Instead, they provide reusable calculations and standardized datasets that simplify report development and ensure consistent business logic.
+
+#### `y_AllStoreItem.sql`
+Creates every possible store-item combination.
+
+**Business Value:** Ensures products with no purchase history are still included in the analysis, making missing orders easier to identify.
+
+#### `y_Distributor_OrderGaps.sql`
+Calculates the time between consecutive orders for each product at each store.
+
+**Business Value:** Reveals ordering frequency and helps identify unusually long gaps between purchases.
+
+#### `y_Distributor_TotalStats.sql`
+Summarizes total order counts and quantities by store and product.
+
+**Business Value:** Provides baseline purchasing statistics for subsequent analyses.
+
+---
+
+### Stage 3: Business Analytics & Decision Support
+
+These analytical queries transform normalized data into decision-support reports used for demand forecasting, purchasing analysis, and operational monitoring.
+
+
+**Demand Forecasting**
 
 #### `Avg2Month_Rolling.sql`
 Calculates a rolling two-month average for each product.
@@ -194,20 +214,24 @@ One row per **Product**.
 
 **Business Value:** Provides a consumption factor that estimates material usage based on recent sales performance, supporting demand forecasting and inventory planning.
 
-#### `y_AllStoreItem.sql`
-Creates every possible store-item combination.
+#### `Expected_Demand_Pattern.sql`
+Calculates the average purchasing behavior for each product using stores with normal ordering patterns.
 
-**Business Value:** Ensures products with no purchase history are still included in the analysis, making missing orders easier to identify.
+**Output**
 
-#### `y_Distributor_OrderGaps.sql`
-Calculates the time between consecutive orders for each product at each store.
+One row per **Product**.
 
-**Business Value:** Reveals ordering frequency and helps identify unusually long gaps between purchases.
+| Column | Description |
+|---------|-------------|
+| ItemName | Product name |
+| AvgGapMonths_ALL | Average months between purchases |
+| AvgQtyPerMonth_ALL | Average monthly purchase quantity |
+| AvgQtyPerWeek_ALL | Average weekly purchase quantity |
 
-#### `y_Distributor_TotalStats.sql`
-Summarizes total order counts and quantities by store and product.
+**Business Value:** Provides a network-wide purchasing baseline by summarizing average ordering intervals and purchasing volumes. This serves as a practical reference for demand forecasting and for identifying stores whose purchasing behavior differs from the typical pattern.
 
-**Business Value:** Provides baseline purchasing statistics for subsequent analyses.
+
+**Purchasing Behavior**
 
 #### `Distributor_OrderCycle_ByItemStore.sql`
 Analyzes purchasing behavior at the individual store level.
@@ -273,27 +297,8 @@ One row per **Product**.
 
 **Business Value:** Highlights items with little or no demand across the store network, helping identify products that may require assortment review, romotional support, or adjustments to purchasing plans.
 
-#### `Expected_Demand_Pattern.sql`
-Calculates the average purchasing behavior for each product using stores with normal ordering patterns.
 
-**Output**
-
-One row per **Product**.
-
-| Column | Description |
-|---------|-------------|
-| ItemName | Product name |
-| AvgGapMonths_ALL | Average months between purchases |
-| AvgQtyPerMonth_ALL | Average monthly purchase quantity |
-| AvgQtyPerWeek_ALL | Average weekly purchase quantity |
-
-**Business Value:** Provides a network-wide purchasing baseline by summarizing average ordering intervals and purchasing volumes. This serves as a practical reference for demand forecasting and for identifying stores whose purchasing behavior differs from the typical pattern.
-
----
-
-### Reference Reports
-
-The following queries provide summarized purchasing views that I regularly use as reference when reviewing historical demand and preparing inventory forecasts.
+**Monitoring Reports**
 
 #### `Distributor_Monthly_Sales.sql`
 Creates a month-by-month summary of distributor sales for each inventory item using a pivot table.
