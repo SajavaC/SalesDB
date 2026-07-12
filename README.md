@@ -123,7 +123,7 @@ These queries import, standardize, and transform data from multiple business sys
 
 Match store names from POS sales reports with the company's master store list.
 
-**Business Value:** 
+**Business Value** 
 
 Automatically assigns the correct StoreCode to each sales record, ensuring that retail sales and distributor shipment data can be linked accurately.
 
@@ -132,7 +132,7 @@ Automatically assigns the correct StoreCode to each sales record, ensuring that 
 
 Identifies stores that appear in newly imported sales data but are not yet included in the master store table.
 
-**Business Value:** 
+**Business Value** 
 
 Helps detect newly opened stores or store name changes before they affect reports and analysis.
 
@@ -141,7 +141,7 @@ Helps detect newly opened stores or store name changes before they affect report
 
 Extract sales quantities for specific products and packaging materials from both main menu items and modifiers.
  
-**Business Value:** 
+**Business Value** 
 
 Translates POS sales into estimated inventory consumption, allowing retail sales to be compared with wholesale purchases.
 
@@ -150,7 +150,7 @@ Translates POS sales into estimated inventory consumption, allowing retail sales
 
 Combines individual product queries into a single dataset.
 
-**Business Value:** 
+**Business Value** 
 
 Creates a standardized sales table that serves as the foundation for downstream analysis.
 
@@ -159,7 +159,7 @@ Creates a standardized sales table that serves as the foundation for downstream 
 
 Combines estimated product consumption from POS with actual shipment records from the distributor.
 
-**Business Value:** 
+**Business Value** 
 
 Provides a unified view that makes it easy to compare what stores sold versus what they ordered from the distributor.
 
@@ -176,7 +176,7 @@ Unlike the final reports, these queries are not designed for direct business con
 
 Creates every possible store-item combination.
 
-**Business Value:** 
+**Business Value** 
 
 Ensures products with no purchase history are still included in the analysis, making missing orders easier to identify.
 
@@ -185,7 +185,7 @@ Ensures products with no purchase history are still included in the analysis, ma
 
 Calculates the time between consecutive orders for each product at each store.
 
-**Business Value:** 
+**Business Value** 
 
 Reveals ordering frequency and helps identify unusually long gaps between purchases.
 
@@ -194,7 +194,7 @@ Reveals ordering frequency and helps identify unusually long gaps between purcha
 
 Summarizes total order counts and quantities by store and product.
 
-**Business Value:** 
+**Business Value** 
 
 Provides baseline purchasing statistics for subsequent analyses.
 
@@ -203,11 +203,13 @@ Provides baseline purchasing statistics for subsequent analyses.
 
 ### Stage 3: Business Analytics & Decision Support
 
-These analytical queries transform normalized data into decision-support reports used for demand forecasting, purchasing analysis, and operational monitoring.
+These analytical queries transform normalized datasets into decision-support reports used for demand forecasting, purchasing analysis, and operational monitoring.
 
 <br>
 
 > 📈 **Demand Forecasting**
+>
+> Analytical queries that support demand planning by estimating product consumption and expected purchasing patterns.
 
 #### `Avg2Month_Rolling.sql`
 
@@ -232,7 +234,7 @@ One row per **Store–Product–Month** combination.
 | SoldQty | Quantity for the current month |
 | Avg2Month | Two-month rolling average quantity |
 
-**Business Value:** 
+**Business Value** 
 
 Reduces the impact of monthly purchasing fluctuations, providing a more stable baseline for comparing product consumption with purchasing activity.
 
@@ -251,7 +253,7 @@ One row per **Product**.
 | ItemName | Product name |
 | Adj_CVR | Adjusted consumption rate per dollar of net sales, used as the forecasting baseline |
 
-**Business Value:** 
+**Business Value** 
 
 Provides a consumption factor that estimates material usage based on recent sales performance, supporting demand forecasting and inventory planning.
 
@@ -272,7 +274,7 @@ One row per **Product**.
 | AvgQtyPerMonth_ALL | Average monthly purchase quantity |
 | AvgQtyPerWeek_ALL | Average weekly purchase quantity |
 
-**Business Value:** 
+**Business Value** 
 
 Provides a network-wide purchasing baseline by summarizing average ordering intervals and purchasing volumes. This serves as a practical reference for demand forecasting and for identifying stores whose purchasing behavior differs from the typical pattern.
 
@@ -280,6 +282,8 @@ Provides a network-wide purchasing baseline by summarizing average ordering inte
 <br>
 
 > 📦 **Purchasing Behavior**
+>
+> Analytical queries that evaluate store ordering behavior and identify purchasing anomalies.
 
 #### `Distributor_OrderCycle_ByItemStore.sql`
 
@@ -304,13 +308,13 @@ One row per **Store–Product** combination.
 | AvgQtyPerWeek | Average weekly purchase quantity (adjusted for store age) |
 | Flag | Indicates stores that are too new or have never placed an order |
 
-**Business Value:**
+**Business Value**
 
-  - Calculates purchasing frequency, average monthly and weekly purchasing volumes based on each store's operating history.
+- Calculates purchasing frequency, average monthly and weekly purchasing volumes based on each store's operating history.
 
-  - Flags newly opened stores that have insufficient history for evaluation.
+- Flags newly opened stores that have insufficient history for evaluation.
 
-  - Identifies established stores that have stopped ordering specific products.
+- Identifies established stores that have stopped ordering specific products.
 
 <br>
 
@@ -334,7 +338,7 @@ One row per **Product**.
 | AvgQtyPerMonth | Average monthly purchase quantity |
 | AvgQtyPerWeek | Average weekly purchase quantity |
 
-**Business Value:** 
+**Business Value** 
 
 Provides a high-level view of purchasing frequency and product movement, supporting inventory planning and procurement decisions.
 
@@ -355,18 +359,20 @@ One row per **Product**.
 | ItemName | Product name |
 | NeverOrderedStoreCount | Number of existing stores that have never ordered the item |
 
-**Business Value:** 
+**Business Value** 
 
-Highlights items with little or no demand across the store network, helping identify products that may require assortment review, romotional support, or adjustments to purchasing plans.
+Highlights items with little or no demand across the store network, helping identify products that may require assortment review, promotional support, or adjustments to purchasing plans.
 
 <br>
 <br>
 
 > 📊 **Monitoring Reports**
+>
+> Operational reports for tracking purchasing activity and reviewing historical trends.
 
 #### `Distributor_Monthly_Sales.sql`
 
-Creates a month-by-month summary of distributor sales for each inventory item using a pivot table.
+Summarizes monthly distributor sales for each inventory item using a pivot table.
 
 **Output**
 
@@ -378,13 +384,13 @@ One row per **Product**, with monthly purchase quantities displayed as columns.
 | ItemName | Product name |
 | Jan, Feb, Mar... | Total quantity purchased in each month |
 
-**Business Value:** 
+**Business Value** 
 
 Provides a quick historical view of purchasing trends, serving as a practical reference when reviewing inventory movement and preparing demand forecasts.
 
 <br>
 
-##### `Distributor_Monthly_Sales_by_DC.sql`
+#### `Distributor_Monthly_Sales_by_DC.sql`
 
 Summarizes monthly distributor sales by distribution center, allowing purchasing patterns to be compared across different regions.
 
@@ -398,6 +404,6 @@ One row per **Product–Distribution Center** combination, with monthly purchase
 | DC | Distribution center |
 | Jan, Feb, Mar... | Total quantity purchased in each month for the selected distribution center |
 
-**Business Value:** 
+**Business Value** 
 
 Supports inventory planning by highlighting regional demand differences and helping determine whether purchasing behavior varies between distribution centers.
