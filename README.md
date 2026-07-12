@@ -307,9 +307,9 @@ One row per **Store–Product** combination.
 **Business Value:**
 
   - Calculates purchasing frequency, average monthly and weekly purchasing volumes based on each store's operating history.
-  - 
+
   - Flags newly opened stores that have insufficient history for evaluation.
-  - 
+
   - Identifies established stores that have stopped ordering specific products.
 
 <br>
