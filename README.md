@@ -281,7 +281,7 @@ One row per **Product**.
 
 **Business Value:** Provides a high-level view of purchasing frequency and product movement, supporting inventory planning and procurement decisions.
 
-> **Note:** Monthly and weekly averages in this report are calculated using a fixed six-month period. As a result, stores that opened recently may have slightly lower averages because inactive months are included in the calculation.
+##### **Note:** Monthly and weekly averages in this report are calculated using a fixed six-month period. As a result, stores that opened recently may have slightly lower averages because inactive months are included in the calculation.
 
 #### `No_Demand_Items.sql`
 Identifies products that have never been purchased by existing stores, excluding newly opened locations.
