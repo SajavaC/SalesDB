@@ -174,7 +174,7 @@ Summarizes total order counts and quantities by store and product.
 These analytical queries transform normalized data into decision-support reports used for demand forecasting, purchasing analysis, and operational monitoring.
 
 
-📈 **Demand Forecasting**
+> **Demand Forecasting**
 
 #### `Avg2Month_Rolling.sql`
 Calculates a rolling two-month average for each product.
@@ -231,7 +231,7 @@ One row per **Product**.
 **Business Value:** Provides a network-wide purchasing baseline by summarizing average ordering intervals and purchasing volumes. This serves as a practical reference for demand forecasting and for identifying stores whose purchasing behavior differs from the typical pattern.
 
 
-🛒 **Purchasing Behavior**
+> **Purchasing Behavior**
 
 #### `Distributor_OrderCycle_ByItemStore.sql`
 Analyzes purchasing behavior at the individual store level.
@@ -298,7 +298,7 @@ One row per **Product**.
 **Business Value:** Highlights items with little or no demand across the store network, helping identify products that may require assortment review, romotional support, or adjustments to purchasing plans.
 
 
-📊 **Monitoring Reports**
+> **Monitoring Reports**
 
 #### `Distributor_Monthly_Sales.sql`
 Creates a month-by-month summary of distributor sales for each inventory item using a pivot table.
