@@ -22,24 +22,24 @@ More importantly, this project demonstrates my ability to translate an undefined
 
 ## Business Applications
 
-This database supports business analysis and decision-making by integrating retail sales data and wholesale purchase data to provide insights into product consumption, purchasing patterns, and supply chain planning.
+This database integrates retail POS sales data with distributor purchasing data to support data-driven decision making across supply chain and operations. By transforming transactional data into a structured analytical framework, it enables repeatable analysis that was not possible using the existing reporting systems.
 
 Its primary business applications include:
 
-1. **Sales & Purchasing Analysis**  
-   Analyzes retail sales performance against wholesale purchasing activity to understand product consumption patterns and identify differences between store demand and ordering behavior.
+### **Sales & Purchasing Reconciliation**
+Compares retail product consumption with distributor purchasing activity to identify purchasing patterns, consumption trends, and discrepancies between store demand and replenishment.
 
-2. **Product Consumption & Conversion Analysis**
-   Calculates product-level consumption metrics, including conversion rates, to evaluate how effectively purchased products are utilized across stores.
+### **Product Consumption & Conversion Analysis**
+Calculates product-level consumption metrics and conversion rates to estimate material usage and establish forecasting inputs based on actual sales performance.
 
-3. **Demand Planning & Inventory Support**
-   Aggregates monthly purchasing quantities by product, region, and distribution center to support demand forecasting, purchasing planning, and inventory management decisions.
+### **Demand Planning & Inventory Support**
+Supports demand forecasting by establishing purchasing baselines, rolling consumption trends, and historical purchasing volumes across products, regions, and distribution centers.
 
-4. **Master Data Validation**
-   Validates store master data during each monthly import by identifying new stores, unmatched store names, and potential data mapping issues before analysis.
+### **Store Purchasing Behavior Analysis**
+Analyzes ordering frequency, purchasing intervals, purchasing velocity, and store-level buying patterns to identify normal purchasing behavior as well as operational exceptions.
 
-5. **Store Purchasing Behavior Analysis**
-   Analyzes historical ordering frequency, purchasing intervals, and average product consumption at both store and product levels to support purchasing strategy and supply chain planning.
+### **Master Data Validation**
+Validates store master data during each monthly import by identifying new stores, unmatched store names, and data mapping issues before downstream analysis begins.
 
 ---
 
