@@ -8,15 +8,15 @@ Note: This public version preserves the database design and query logic while re
 
 ## Project Overview
 
-This project was originally created to solve a recurring operational reporting challenge.
+SalesDB was created after I identified recurring discrepancies between retail consumption and distributor purchasing during routine supply chain analysis.
 
-Retail sales data from POS and wholesale shipment data from a wholesale distributor were stored in separate systems, making it difficult to compare product consumption with purchasing behavior. Preparing these analyses manually was time-consuming and difficult to maintain as the business continued to expand.
+There was no existing system or analytical framework capable of explaining these differences. I analyzed the available data sources, business requirements, and system limitations, then designed a normalized relational database capable of answering questions that the existing systems could not.
 
-To solve this problem, I designed this relational database in Microsoft Access to consolidate both data sources into a single data model. The database automates monthly reporting, supports both operational analysis and supply chain planning by providing insights into product consumption, purchasing behavior, and demand forecasting.
+Rather than producing one-time reports, the database was designed as an analytical framework that supports multiple business decisions across supply chain and operations from the same normalized data model. The resulting reports support demand forecasting, purchasing behavior analysis, operational monitoring, and exception detection without requiring repetitive manual analysis.
 
-Although built with Microsoft Access, the focus of this project is not the database platform itself, but designing a practical business solution that supports operational decision-making.
+One of the key outcomes of this project was establishing a **normal purchasing baseline** for each product by identifying typical ordering frequency and purchasing volumes across established stores while excluding newly opened locations and stores with no purchasing history. This baseline provides a practical reference for demand forecasting, purchasing analysis, and operational exception management.
 
-This database was not created as a technical exercise. It was built to eliminate repetitive manual analysis by automating reports that had become part of the monthly business process.
+More importantly, this project demonstrates my ability to translate an undefined business problem into a structured analytical framework that supports repeatable, data-driven decision making.
 
 ---
 
